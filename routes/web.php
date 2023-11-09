@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,13 @@ Route::middleware([
 
     Route::name('users.')->prefix('users')->group(function () {
         Route::get('', [UserController::class, 'index'])
+            ->name('index')
+            ->middleware(['permission:users.index']);
+    });
+
+
+    Route::name('logs.')->prefix('logs')->group(function () {
+        Route::get('', [LogController::class, 'index'])
             ->name('index')
             ->middleware(['permission:users.index']);
     });

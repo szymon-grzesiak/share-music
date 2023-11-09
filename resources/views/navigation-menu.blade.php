@@ -20,6 +20,11 @@
                             {{ __('translation.navigation.users') }}
                         </x-nav-link>
                     @endcan
+                    @can('users.index')
+                        <x-nav-link href="{{ route('logs.index') }}" :active="request()->routeIs('logs.index')">
+                            {{ __('translation.navigation.logs') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
@@ -148,6 +153,11 @@
             @can('users.index')
                 <x-responsive-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                     {{ __('translation.navigation.users') }}
+                </x-responsive-nav-link>
+            @endcan
+            @can('users.index')
+                <x-responsive-nav-link href="{{ route('logs.index') }}" :active="request()->routeIs('logs.index')">
+                    {{ __('translation.navigation.logs') }}
                 </x-responsive-nav-link>
             @endcan
         </div>

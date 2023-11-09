@@ -76,6 +76,7 @@ return [
     'navigation' => [
         'dashboard' => 'Dashboard',
         'users' => 'Użytkownicy',
+        'logs' => 'Logi',
         'categories' => 'Kategorie',
         'manufacturers' => 'Producenci',
         'products' => 'Produkty',
