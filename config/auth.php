@@ -112,5 +112,10 @@ return [
 
     'password_timeout' => 10800,
 
+    'roles' => [
+        'admin' => env('ROLE_ADMIN', 'admin'),
+        'artist' => env('ROLE_ARTIST', 'artist'),
+        'user' => env('ROLE_USER', 'user'),
+    ]
 
 ];
