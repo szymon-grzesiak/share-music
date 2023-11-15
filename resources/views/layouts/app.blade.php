@@ -11,16 +11,17 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <!-- Styles -->
         @livewireStyles
         @laravelViewsStyles(laravel-views)
+        <!-- Scripts -->
+        @wireUiScripts
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased bg-sky-200">
         <x-banner />
-
+        <x-notifications />
         <div class="">
             @livewire('navigation-menu')
 

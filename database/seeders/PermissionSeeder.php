@@ -21,6 +21,8 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'users.store']);
         Permission::create(['name' => 'users.destroy']);
         Permission::create(['name' => 'users.change_role']);
+        Permission::create(['name' => 'categories.index']);
+        Permission::create(['name' => 'categories.manage']);
 
         $userRole = Role::findByName(config('auth.roles.admin'));
         $userRole->givePermissionTo('users.index');
