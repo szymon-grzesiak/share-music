@@ -24,7 +24,7 @@ class AssignArtistRoleAction extends Action
      * This should be a valid Feather icon string
      * @var String
      */
-    public $icon = 'droplet';
+    public $icon = 'pen-tool';
 
     /**
      * Execute the action when the user clicked on the button

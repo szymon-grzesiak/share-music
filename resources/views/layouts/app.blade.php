@@ -18,10 +18,10 @@
         @livewireStyles
         @laravelViewsStyles(laravel-views)
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased bg-sky-200">
         <x-banner />
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="">
             @livewire('navigation-menu')
 
             <!-- Page Heading -->

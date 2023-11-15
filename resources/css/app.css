@@ -9,3 +9,14 @@
 .table-view-wrapper .pointer-events-none.absolute.inset-y-0.right-0.flex.items-center.px-2.text-gray-700 {
     display: none
 }
+
+.primary-text-gradient {
+    background: linear-gradient(129deg, #55e0ff 0%, #be87d9 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.table-view-wrapper .pointer-events-none.absolute.inset-y-0.right-0.flex.items-center.px-2.text-gray-700 {
+    display: none
+}
