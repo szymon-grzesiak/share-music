@@ -23,6 +23,8 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'users.change_role']);
         Permission::create(['name' => 'genres.index']);
         Permission::create(['name' => 'genres.manage']);
+        Permission::create(['name' => 'record_labels.index']);
+        Permission::create(['name' => 'record_labels.manage']);
 
         // ADMINISTRATOR SYSTEMU
         $userRole = Role::findByName(config('auth.roles.admin'));
@@ -32,28 +34,32 @@ class PermissionSeeder extends Seeder
         $userRole->givePermissionTo('users.change_role');
         $userRole->givePermissionTo('genres.index');
         $userRole->givePermissionTo('genres.manage');
-        $userRole->givePermissionTo('song.index');
-        $userRole->givePermissionTo('song.create');
-        $userRole->givePermissionTo('song.edit');
-        $userRole->givePermissionTo('song.destroy');
+//        $userRole->givePermissionTo('song.index');
+//        $userRole->givePermissionTo('song.create');
+//        $userRole->givePermissionTo('song.edit');
+//        $userRole->givePermissionTo('song.destroy');
+        $userRole->givePermissionTo('record_labels.index');
+        $userRole->givePermissionTo('record_labels.manage');
 
         // ARTYSTA
         $userRole = Role::findByName(config('auth.roles.artist'));
         $userRole->givePermissionTo('genres.index');
-        $userRole->givePermissionTo('songs.index');
-        $userRole->givePermissionTo('song.create');
-        $userRole->givePermissionTo('song.edit');
-        $userRole->givePermissionTo('song.destroy');
+//        $userRole->givePermissionTo('songs.index');
+//        $userRole->givePermissionTo('song.create');
+//        $userRole->givePermissionTo('song.edit');
+//        $userRole->givePermissionTo('song.destroy');
+        $userRole->givePermissionTo('record_labels.index');
 
 
         // UŻYTKOWNIKA SYSTEMU
         $userRole = Role::findByName(config('auth.roles.user'));
         $userRole->givePermissionTo('genres.index');
-        $userRole->givePermissionTo('songs.index');
-        $userRole->givePermissionTo('playlist.index');
-        $userRole->givePermissionTo('playlist.create');
-        $userRole->givePermissionTo('playlist.edit');
-        $userRole->givePermissionTo('playlist.destroy');
+//        $userRole->givePermissionTo('songs.index');
+//        $userRole->givePermissionTo('playlist.index');
+//        $userRole->givePermissionTo('playlist.create');
+//        $userRole->givePermissionTo('playlist.edit');
+//        $userRole->givePermissionTo('playlist.destroy');
+        $userRole->givePermissionTo('record_labels.index');
 
 
         // users, artists, albums, songs, genres, playlists

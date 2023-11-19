@@ -30,6 +30,11 @@
                             {{ __('translation.navigation.genres') }}
                         </x-nav-link>
                     @endcan
+                    @can('users.index')
+                        <x-nav-link href="{{ route('record_labels.index') }}" :active="request()->routeIs('record_labels.index')">
+                            {{ __('translation.navigation.record_labels') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
