@@ -10,10 +10,10 @@
             <div class="bg-white shadow-xl sm:rounded-lg table-view-wrapper">
                 <div class="grid justify-items-stretch pt-2 pr-2">
                     @can('create', App\Models\Genre::class)
-                        <x-button primary
+                        <x-wireui-button primary
                                   label="{{ __('genres.actions.create') }}"
                                   href="{{ route('genres.create') }}"
-                                  class="justify-self-end" />
+                                  class="justify-self-end bg-blue-300" />
                     @endcan
                 </div>
                 <livewire:genres.genres-table-view />

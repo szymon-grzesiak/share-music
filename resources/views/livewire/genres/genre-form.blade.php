@@ -14,14 +14,14 @@
                 <label for="name">{{ __('genres.attributes.name') }}</label>
             </div>
             <div class="">
-                <x-input placeholder="{{ __('translation.enter') }}" wire:model="genre.name" />
+                <x-wireui-input placeholder="{{ __('translation.enter') }}" wire:model="genre.name" />
             </div>
         </div>
 
         <hr class="my-2">
         <div class="flex justify-end pt-2">
-            <x-button href="{{ route('genres.index') }}" secondary class="mr-2" label="{{ __('translation.back') }}" />
-            <x-button type="submit" primary label="{{ __('translation.save') }}" spinner />
+            <x-wireui-button href="{{ route('genres.index') }}" secondary class="mr-2 bg-blue-200" label="{{ __('translation.back') }}" />
+            <x-wireui-button type="submit" primary label="{{ __('translation.save') }}" class="bg-blue-300" spinner />
         </div>
     </form>
 </div>

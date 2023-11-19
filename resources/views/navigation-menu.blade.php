@@ -25,7 +25,7 @@
                             {{ __('translation.navigation.logs') }}
                         </x-nav-link>
                     @endcan
-                    @can('genres.index')
+                    @can('users.index')
                         <x-nav-link href="{{ route('genres.index') }}" :active="request()->routeIs('genres.index')">
                             {{ __('translation.navigation.genres') }}
                         </x-nav-link>

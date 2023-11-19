@@ -36,7 +36,7 @@ class GenrePolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Genre  $Genre
+     * @param  \App\Models\Genre  $genre
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(User $user, Genre $genre)
@@ -49,7 +49,7 @@ class GenrePolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Genre  $Genre
+     * @param  \App\Models\Genre  $genre
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(User $user, Genre $genre)
@@ -62,7 +62,7 @@ class GenrePolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Genre  $Genre
+     * @param  \App\Models\Genre  $genre
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function restore(User $user, Genre $genre)

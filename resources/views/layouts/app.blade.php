@@ -20,7 +20,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased bg-sky-200">
-        <x-wireui-banner />
+        <x-banner />
         <x-wireui-notifications />
         <x-wireui-dialog />
         <div class="">
@@ -44,6 +44,6 @@
         @stack('modals')
 
         @livewireScripts
-        @laravelViewsStyles('laravel-views')
+        @laravelViewsScripts('laravel-views')
     </body>
 </html>

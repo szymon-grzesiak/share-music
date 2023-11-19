@@ -14,6 +14,7 @@ class GenreController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Genre::class);
         return view(
             'genres.index'
         );
@@ -26,6 +27,8 @@ class GenreController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Genre::class);
+
         return view(
             'genres.form'
         );
@@ -39,6 +42,7 @@ class GenreController extends Controller
      */
     public function edit(Genre $genre)
     {
+        $this->authorize('update', $genre);
         return view(
             'genres.form',
             [
