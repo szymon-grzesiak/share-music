@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Http\Livewire\Categories;
+namespace App\Http\Livewire\Genres;
 
-use App\Models\Category;
+use App\Models\Genre;
 use WireUi\Traits\Actions;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use LaravelViews\Actions\RedirectAction;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Livewire\Filters\SoftDeletedFilter;
-use App\Http\Livewire\Categories\Actions\EditCategoryAction;
+use App\Http\Livewire\Genres\Actions\EditGenreAction;
+use App\Http\Livewire\Genres\Actions\RestoreGenreAction;
+use App\Http\Livewire\Genres\Actions\SoftDeletesGenreAction;
 
-class CategoriesTableView extends TableView
+class GenresTableView extends TableView
 {
     use Actions;
 
@@ -32,7 +34,7 @@ class CategoriesTableView extends TableView
      */
     public function repository(): Builder
     {
-        return Category::query()->withTrashed();
+        return Genre::query()->withTrashed();
     }
 
     /**
@@ -43,7 +45,7 @@ class CategoriesTableView extends TableView
     public function headers(): array
     {
         return [
-            Header::title(__('categories.attributes.name'))->sortBy('name'),
+            Header::title(__('genres.attributes.name'))->sortBy('name'),
             Header::title(__('translation.attributes.created_at'))->sortBy('created_at'),
             Header::title(__('translation.attributes.updated_at'))->sortBy('updated_at'),
             Header::title(__('translation.attributes.deleted_at'))->sortBy('deleted_at'),
@@ -79,10 +81,36 @@ class CategoriesTableView extends TableView
     protected function actionsByRow()
     {
         return [
-            new EditCategoryAction(
-                'categories.edit',
-                __('categories.actions.edit')
+            new EditGenreAction(
+                'genres.edit',
+                __('genres.actions.edit')
             ),
+            new SoftDeletesGenreAction(),
+            new RestoreGenreAction(),
         ];
+    }
+
+    public function softDeletes(int $id)
+    {
+        $genre = Genre::find($id);
+        $genre->delete();
+        $this->notification()->success(
+            $title = __('translation.messages.successes.destroyed_title'),
+            $description = __('genres.messages.successes.destroyed', [
+                'name' => $genre->name
+            ])
+        );
+    }
+
+    public function restore(int $id)
+    {
+        $genre = Genre::withTrashed()->find($id);
+        $genre->restore();
+        $this->notification()->success(
+            $title = __('translation.messages.successes.restored_title'),
+            $description = __('genres.messages.successes.restored', [
+                'name' => $genre->name
+            ])
+        );
     }
 }

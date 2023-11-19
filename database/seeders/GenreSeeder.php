@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
+use App\Models\Genre;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CategorySeeder extends Seeder
+class GenreSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Category::factory()->count(50)->create();
+        Genre::factory()->count(50)->create();
     }
 }

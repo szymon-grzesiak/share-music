@@ -1,29 +1,31 @@
 <?php
 
-namespace App\Http\Livewire\Categories;
+namespace App\Http\Livewire\Genres;
 
 use Livewire\Component;
-use App\Models\Category;
+use App\Models\Genre;
 use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class CategoryForm extends Component
+class GenreForm extends Component
 {
     use Actions;
+    use AuthorizesRequests;
 
-    public Category $category;
+    public Genre $genre;
     public Bool $editMode;
 
     public function rules()
     {
         return [
-            'category.name' => [
+            'genre.name' => [
                 'required',
                 'string',
                 'min:2',
-                'unique:categories,name' .
+                'unique:genres,name' .
                 ($this->editMode
-                    ? (',' . $this->category->id)
+                    ? (',' . $this->genre->id)
                     : ''
                 ),
             ],
@@ -34,20 +36,20 @@ class CategoryForm extends Component
     {
         return [
             'name' => Str::lower(
-                __('categories.attributes.name')
+                __('genres.attributes.name')
             ),
         ];
     }
 
-    public function mount(Category $category, Bool $editMode)
+    public function mount(Genre $genre, Bool $editMode)
     {
-        $this->category = $category;
+        $this->genre = $genre;
         $this->editMode = $editMode;
     }
 
     public function render()
     {
-        return view('livewire.categories.category-form');
+        return view('livewire.genres.genre-form');
     }
 
     /**
@@ -61,18 +63,23 @@ class CategoryForm extends Component
     public function save()
     {
         sleep(1);   // tymczasowo, celem pokazania opóźnienia
+        if ($this->editMode) {
+            $this->authorize('update', $this->genre);
+        } else {
+            $this->authorize('create', Genre::class);
+        }
         $this->validate();
-        $this->category->save();
+        $this->genre->save();
         $this->notification()->success(
             $title = $this->editMode
                 ? __('translation.messages.successes.updated_title')
                 : __('translation.messages.successes.stored_title'),
             $description = $this->editMode
-                ? __('categories.messages.successes.updated', ['name' => $this->category->name])
-                : __('categories.messages.successes.stored', ['name' => $this->category->name])
+                ? __('genres.messages.successes.updated', ['name' => $this->genre->name])
+                : __('genres.messages.successes.stored', ['name' => $this->genre->name])
         );
         $this->editMode = true;
         // opcjonalne przekierowanie na inny adres URL
-        // return redirect()->route('categories.index');
+        // return redirect()->route('genres.index');
     }
 }

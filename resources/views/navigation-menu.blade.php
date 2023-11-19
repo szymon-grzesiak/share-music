@@ -25,9 +25,9 @@
                             {{ __('translation.navigation.logs') }}
                         </x-nav-link>
                     @endcan
-                    @can('categories.index')
-                        <x-nav-link href="{{ route('categories.index') }}" :active="request()->routeIs('categories.index')">
-                            {{ __('translation.navigation.categories') }}
+                    @can('genres.index')
+                        <x-nav-link href="{{ route('genres.index') }}" :active="request()->routeIs('genres.index')">
+                            {{ __('translation.navigation.genres') }}
                         </x-nav-link>
                     @endcan
                 </div>
@@ -42,7 +42,6 @@
                                 <span class="inline-flex rounded-md">
                                     <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
                                         {{ Auth::user()->currentTeam->name }}
-
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
                                         </svg>
@@ -165,9 +164,9 @@
                     {{ __('translation.navigation.logs') }}
                 </x-responsive-nav-link>
             @endcan
-            @can('categories.index')
-                <x-responsive-nav-link href="{{ route('categories.index') }}" :active="request()->routeIs('categories.index')">
-                    {{ __('translation.navigation.categories') }}
+            @can('genres.index')
+                <x-responsive-nav-link href="{{ route('genres.index') }}" :active="request()->routeIs('genres.index')">
+                    {{ __('translation.navigation.genres') }}
                 </x-responsive-nav-link>
             @endcan
         </div>

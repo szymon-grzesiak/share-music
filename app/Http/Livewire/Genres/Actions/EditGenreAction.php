@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Categories\Actions;
+namespace App\Http\Livewire\Genres\Actions;
 
 use LaravelViews\Views\View;
 use LaravelViews\Actions\RedirectAction;
 
-class EditCategoryAction extends RedirectAction
+class EditGenreAction extends RedirectAction
 {
     public function __construct(string $to, string $title, string $icon = 'edit')
     {

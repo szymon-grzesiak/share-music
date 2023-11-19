@@ -77,7 +77,7 @@ return [
         'dashboard' => 'Dashboard',
         'users' => 'Użytkownicy',
         'logs' => 'Logi',
-        'categories' => 'Kategorie',
+        'genres' => 'Gatunki',
         'manufacturers' => 'Producenci',
         'products' => 'Produkty',
         'order_wizard' => 'Składanie zamówienia',

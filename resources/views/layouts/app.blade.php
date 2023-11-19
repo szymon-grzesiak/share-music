@@ -14,14 +14,15 @@
 
         <!-- Styles -->
         @livewireStyles
-        @laravelViewsStyles(laravel-views)
+        @laravelViewsStyles('laravel-views')
         <!-- Scripts -->
         @wireUiScripts
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased bg-sky-200">
-        <x-banner />
-        <x-notifications />
+        <x-wireui-banner />
+        <x-wireui-notifications />
+        <x-wireui-dialog />
         <div class="">
             @livewire('navigation-menu')
 
@@ -43,6 +44,6 @@
         @stack('modals')
 
         @livewireScripts
-        @laravelViewsScripts(laravel-views)
+        @laravelViewsStyles('laravel-views')
     </body>
 </html>

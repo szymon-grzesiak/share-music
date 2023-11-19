@@ -6,11 +6,11 @@ return [
         'name' => 'Nazwa',
         'description' => 'Opis',
         'manufacturer' => 'Producent',
-        'categories' => 'Kategorie',
+        'genres' => 'Gatunki',
         'price' => 'Cena',
     ],
     'filters' => [
-        'categories' => 'Nazwa kategorii',
+        'genres' => 'Nazwa gatunku',
         'manufacturer' => 'Nazwa producenta',
     ],
     'actions' => [
