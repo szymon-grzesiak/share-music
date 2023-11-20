@@ -13,7 +13,7 @@
                         <x-wireui-button primary
                                   label="{{ __('genres.actions.create') }}"
                                   href="{{ route('genres.create') }}"
-                                  class="justify-self-end bg-blue-300" />
+                                         class="justify-self-end bg-blue-300 hover:bg-blue-500" />
                     @endcan
                 </div>
                 <livewire:genres.genres-table-view />

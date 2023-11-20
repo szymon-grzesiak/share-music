@@ -9,9 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-xl sm:rounded-lg">
                 @if (isset($record_label))
-                    <livewire:record_labels.record_labels-form :genre="$record_label" :editMode="true" />
+                    <livewire:record-labels.record-label-form :record_label="$record_label" :editMode="true" />
                 @else
-                    <livewire:record_labels.record_labels-form :editMode="false" />
+                    <livewire:record-labels.record-label-form :editMode="false" />
                 @endif
             </div>
         </div>

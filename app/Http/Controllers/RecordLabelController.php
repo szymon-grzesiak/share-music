@@ -42,7 +42,6 @@ class RecordLabelController extends Controller
      */
     public function edit(RecordLabel $record_label)
     {
-        $this->authorize('update', $record_label);
         return view(
             'record_labels.form',
             [

@@ -50,4 +50,8 @@ class GenreController extends Controller
             ]
         );
     }
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

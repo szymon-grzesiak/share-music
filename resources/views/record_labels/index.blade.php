@@ -13,7 +13,7 @@
                         <x-wireui-button primary
                                          label="{{ __('record_labels.actions.create') }}"
                                          href="{{ route('record_labels.create') }}"
-                                         class="justify-self-end bg-blue-300" />
+                                         class="justify-self-end bg-blue-300 hover:bg-blue-500" />
                     @endcan
                 </div>
                 <livewire:record-labels.record-labels-table-view />

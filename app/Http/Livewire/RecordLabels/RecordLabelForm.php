@@ -49,8 +49,10 @@ class RecordLabelForm extends Component
 
     public function render()
     {
-        return view('livewire.record_labels.record_label-form');
+        return view('livewire.record_labels.record_labels-form');
     }
+
+
 
     /**
      * Walidacja na żywo
@@ -75,9 +77,10 @@ class RecordLabelForm extends Component
                 ? __('translation.messages.successes.updated_title')
                 : __('translation.messages.successes.stored_title'),
             $description = $this->editMode
-                ? __('genres.messages.successes.updated', ['name' => $this->record_label->name])
-                : __('genres.messages.successes.stored', ['name' => $this->record_label->name])
+                ? __('record_labels.messages.successes.updated', ['name' => $this->record_label->name])
+                : __('record_labels.messages.successes.stored', ['name' => $this->record_label->name])
         );
+
         $this->editMode = true;
         // opcjonalne przekierowanie na inny adres URL
         // return redirect()->route('genres.index');

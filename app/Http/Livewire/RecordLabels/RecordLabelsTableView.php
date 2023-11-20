@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\RecordLabels;
 
-use App\Http\Livewire\Traits\Restore;
+use App\Http\Livewire\RecordLabels\Actions\RestoreRecordLabelAction;
+use App\Http\Livewire\RecordLabels\Actions\SoftDeletesRecordLabelAction;
 use App\Models\RecordLabel;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use WireUi\Traits\Actions;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
@@ -12,8 +12,6 @@ use LaravelViews\Actions\RedirectAction;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Livewire\Filters\SoftDeletedFilter;
 use App\Http\Livewire\RecordLabels\Actions\EditRecordLabelAction;
-use App\Http\Livewire\RecordLabels\Actions\RestoreRecordLabelAction;
-use App\Http\Livewire\RecordLabels\Actions\SoftDeletesRecordLabelAction;
 
 
 class RecordLabelsTableView extends TableView
@@ -90,28 +88,24 @@ class RecordLabelsTableView extends TableView
                 'record_labels.edit',
                 __('record_labels.actions.edit')
             ),
-            new SoftDeletesRecordLabelAction(
-                __('record_labels.actions.destroy')
-            ),
-            new RestoreRecordLabelAction(
-                __('record_labels.actions.restore')
-            ),
+            new SoftDeletesRecordLabelAction(),
+            new RestoreRecordLabelAction(),
         ];
     }
 
-    protected function softDeletesNotificationDescription(Model $model)
-    {
-        return __('record_labels.messages.successes.destroyed', [
-            'name' => $model
-        ]);
-    }
-
-    protected function restoreNotificationDescription(Model $model)
-    {
-        return __('record_labels.messages.successes.restored', [
-            'name' => $model
-        ]);
-    }
+//    protected function softDeletesNotificationDescription(Model $model)
+//    {
+//        return __('record_labels.messages.successes.destroyed', [
+//            'name' => $model
+//        ]);
+//    }
+//
+//    protected function restoreNotificationDescription(Model $model)
+//    {
+//        return __('record_labels.messages.successes.restored', [
+//            'name' => $model
+//        ]);
+//    }
 
     public function softDeletes(int $id)
     {
