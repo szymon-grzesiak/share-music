@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genre;
 use App\Models\RecordLabel;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,7 @@ class RecordLabelController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', RecordLabel::class);
 
         return view(
             'record_labels.index'
@@ -42,6 +44,7 @@ class RecordLabelController extends Controller
      */
     public function edit(RecordLabel $record_label)
     {
+        $this->authorize('update', $record_label);
         return view(
             'record_labels.form',
             [

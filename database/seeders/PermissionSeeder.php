@@ -48,6 +48,8 @@ class PermissionSeeder extends Seeder
 //        $userRole->givePermissionTo('song.create');
 //        $userRole->givePermissionTo('song.edit');
 //        $userRole->givePermissionTo('song.destroy');
+
+        // jeden song mo
         $userRole->givePermissionTo('record_labels.index');
 
 
@@ -59,6 +61,10 @@ class PermissionSeeder extends Seeder
 //        $userRole->givePermissionTo('playlist.create');
 //        $userRole->givePermissionTo('playlist.edit');
 //        $userRole->givePermissionTo('playlist.destroy');
+//        $userRole->givePermissionTo('albums.index');
+//        $userRole->givePermissionTo('albums.create');
+//        $userRole->givePermissionTo('albums.edit');
+//        $userRole->givePermissionTo('albums.destroy');
         $userRole->givePermissionTo('record_labels.index');
 
 

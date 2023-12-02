@@ -14,7 +14,13 @@
                 <label for="name">{{ __('genres.attributes.name') }}</label>
             </div>
             <div class="">
-                <x-wireui-input placeholder="{{ __('translation.enter') }}" wire:model="genre.name" />
+{{--                <x-wireui-input placeholder="{{ __('translation.enter') }}" wire:model="genre.name" />--}}
+                <x-wireui-datetime-picker
+                    label="Appointment Date"
+                    placeholder="Appointment Date"
+                    display-format="DD-MM-YYYY HH:mm"
+                    wire:model.defer="displayFormat"
+                />
             </div>
         </div>
 

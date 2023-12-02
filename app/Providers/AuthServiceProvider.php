@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use App\Models\Genre;
+use App\Models\RecordLabel;
+use App\Policies\GenrePolicy;
+use App\Policies\RecordLabelPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -13,7 +17,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        //
+        Genre::class => GenrePolicy::class,
+        RecordLabel::class => RecordLabelPolicy::class,
     ];
 
     /**
