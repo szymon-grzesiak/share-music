@@ -29,15 +29,36 @@ class UserSeeder extends Seeder
             $admin->assignRole($adminRole);
         }
 
-        $artist = User::create([
+        $artistRole = Role::findByName(config('auth.roles.artist'));
+
+        $artist1 = User::create([
             'name' => 'Artysta Testowy',
             'email' => 'artist.test@localhost',
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('12345678'),
         ]);
-        $artistRole = Role::findByName(config('auth.roles.artist'));
         if (isset($artistRole)) {
-            $artist->assignRole($artistRole);
+            $artist1->assignRole($artistRole);
+        }
+
+        $artist2 = User::create([
+            'name' => 'Artysta Testowy 2',
+            'email' => 'artist2.test@localhost',
+            'email_verified_at' => Carbon::now(),
+            'password' => Hash::make('12345678'),
+        ]);
+        if (isset($artistRole)) {
+            $artist2->assignRole($artistRole);
+        }
+
+        $artist3 = User::create([
+            'name' => 'Artysta Testowy 3',
+            'email' => 'artist3.test@localhost',
+            'email_verified_at' => Carbon::now(),
+            'password' => Hash::make('12345678'),
+        ]);
+        if (isset($artistRole)) {
+            $artist3->assignRole($artistRole);
         }
 
         $user = User::create([

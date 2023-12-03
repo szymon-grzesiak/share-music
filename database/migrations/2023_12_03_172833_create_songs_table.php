@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('title', 100);
             $table->unsignedBigInteger('album_id');
-            $table->unsignedBigInteger('genre_id');
             $table->unsignedBigInteger('artist_id');
             $table->unsignedBigInteger('record_label_id');
             $table->foreign('album_id')
@@ -31,6 +30,7 @@ return new class extends Migration
                 ->on('record_labels')
                 ->onDelete('no action');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

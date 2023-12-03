@@ -57,7 +57,7 @@ Route::middleware([
         'index', 'create', 'edit'
     ]);
 
-    Route::resource('albums', SongController::class)->only([
+    Route::resource('songs', SongController::class)->only([
         'index', 'create', 'edit'
     ]);
 });

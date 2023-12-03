@@ -38,8 +38,8 @@ class PermissionSeeder extends Seeder
         $userRole->givePermissionTo('users.change_role');
         $userRole->givePermissionTo('genres.index');
         $userRole->givePermissionTo('genres.manage');
-        $userRole->givePermissionTo('song.index');
-        $userRole->givePermissionTo('song.manage');
+        $userRole->givePermissionTo('songs.index');
+        $userRole->givePermissionTo('songs.manage');
         $userRole->givePermissionTo('record_labels.index');
         $userRole->givePermissionTo('record_labels.manage');
         $userRole->givePermissionTo('albums.index');

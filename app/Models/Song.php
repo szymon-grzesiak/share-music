@@ -17,7 +17,7 @@ class Song extends Model
     {
         return $this->belongsTo(Album::class);
     }
-    public function recordLabel()
+    public function record_label()
     {
         return $this->belongsTo(RecordLabel::class);
     }
@@ -25,8 +25,8 @@ class Song extends Model
     {
         return $this->belongsToMany(Genre::class);
     }
-    public function artist()
+    public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'artist_id');
     }
 }
