@@ -39,7 +39,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -72,5 +72,13 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],
+    /**
+     * Miejsce gromadzenia plików z grafiką
+     */
+    'images_dir' => env('IMAGES_DIR', 'images'),
 
+    /**
+     * Domyślny plik graficzny
+     */
+    'default_image' => env('DEFAULT_IMAGE', 'no-image.png'),
 ];

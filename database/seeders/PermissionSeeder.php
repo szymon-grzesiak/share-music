@@ -27,6 +27,8 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'record_labels.manage']);
         Permission::create(['name' => 'albums.index']);
         Permission::create(['name' => 'albums.manage']);
+        Permission::create(['name' => 'songs.index']);
+        Permission::create(['name' => 'songs.manage']);
 
         // ADMINISTRATOR SYSTEMU
         $userRole = Role::findByName(config('auth.roles.admin'));
@@ -36,10 +38,8 @@ class PermissionSeeder extends Seeder
         $userRole->givePermissionTo('users.change_role');
         $userRole->givePermissionTo('genres.index');
         $userRole->givePermissionTo('genres.manage');
-//        $userRole->givePermissionTo('song.index');
-//        $userRole->givePermissionTo('song.create');
-//        $userRole->givePermissionTo('song.edit');
-//        $userRole->givePermissionTo('song.destroy');
+        $userRole->givePermissionTo('song.index');
+        $userRole->givePermissionTo('song.manage');
         $userRole->givePermissionTo('record_labels.index');
         $userRole->givePermissionTo('record_labels.manage');
         $userRole->givePermissionTo('albums.index');
@@ -48,7 +48,8 @@ class PermissionSeeder extends Seeder
         // ARTYSTA
         $userRole = Role::findByName(config('auth.roles.artist'));
         $userRole->givePermissionTo('genres.index');
-//        $userRole->givePermissionTo('songs.index');
+        $userRole->givePermissionTo('songs.index');
+        $userRole->givePermissionTo('songs.manage');
         $userRole->givePermissionTo('albums.index');
 
         // jeden song mo
