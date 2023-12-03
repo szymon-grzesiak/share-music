@@ -25,6 +25,8 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'genres.manage']);
         Permission::create(['name' => 'record_labels.index']);
         Permission::create(['name' => 'record_labels.manage']);
+        Permission::create(['name' => 'albums.index']);
+        Permission::create(['name' => 'albums.manage']);
 
         // ADMINISTRATOR SYSTEMU
         $userRole = Role::findByName(config('auth.roles.admin'));
@@ -40,14 +42,14 @@ class PermissionSeeder extends Seeder
 //        $userRole->givePermissionTo('song.destroy');
         $userRole->givePermissionTo('record_labels.index');
         $userRole->givePermissionTo('record_labels.manage');
+        $userRole->givePermissionTo('albums.index');
+        $userRole->givePermissionTo('albums.manage');
 
         // ARTYSTA
         $userRole = Role::findByName(config('auth.roles.artist'));
         $userRole->givePermissionTo('genres.index');
 //        $userRole->givePermissionTo('songs.index');
-//        $userRole->givePermissionTo('song.create');
-//        $userRole->givePermissionTo('song.edit');
-//        $userRole->givePermissionTo('song.destroy');
+        $userRole->givePermissionTo('albums.index');
 
         // jeden song mo
         $userRole->givePermissionTo('record_labels.index');
@@ -56,15 +58,12 @@ class PermissionSeeder extends Seeder
         // UŻYTKOWNIKA SYSTEMU
         $userRole = Role::findByName(config('auth.roles.user'));
         $userRole->givePermissionTo('genres.index');
+        $userRole->givePermissionTo('albums.index');
 //        $userRole->givePermissionTo('songs.index');
 //        $userRole->givePermissionTo('playlist.index');
 //        $userRole->givePermissionTo('playlist.create');
 //        $userRole->givePermissionTo('playlist.edit');
 //        $userRole->givePermissionTo('playlist.destroy');
-//        $userRole->givePermissionTo('albums.index');
-//        $userRole->givePermissionTo('albums.create');
-//        $userRole->givePermissionTo('albums.edit');
-//        $userRole->givePermissionTo('albums.destroy');
         $userRole->givePermissionTo('record_labels.index');
 
 

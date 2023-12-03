@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\RecordLabelController;
 use App\Http\Controllers\LogController;
@@ -48,6 +49,10 @@ Route::middleware([
     ]);
 
     Route::resource('record_labels', RecordLabelController::class)->only([
+        'index', 'create', 'edit'
+    ]);
+
+    Route::resource('albums', AlbumController::class)->only([
         'index', 'create', 'edit'
     ]);
 });

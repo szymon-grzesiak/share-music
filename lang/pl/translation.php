@@ -82,5 +82,6 @@ return [
         'products' => 'Produkty',
         'order_wizard' => 'Składanie zamówienia',
         'record_labels' => 'Wytwórnie muzyczne',
+        'albums' => 'Albumy',
     ],
 ];
