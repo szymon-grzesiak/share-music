@@ -2,7 +2,7 @@
 
 return [
     'attributes' => [
-        'name' => 'Imię i nazwisko',
+        'name' => 'Artysta',
         'email' => 'Email',
         'email_verified_at' => 'Email zweryfikowano',
         'roles' => 'Role',

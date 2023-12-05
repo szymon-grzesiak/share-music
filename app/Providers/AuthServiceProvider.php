@@ -4,9 +4,7 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 use App\Models\Genre;
-use App\Models\RecordLabel;
 use App\Policies\GenrePolicy;
-use App\Policies\RecordLabelPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider

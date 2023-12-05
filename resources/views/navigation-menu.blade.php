@@ -31,11 +31,6 @@
                         </x-nav-link>
                     @endcan
                     @can('users.index')
-                        <x-nav-link href="{{ route('record_labels.index') }}" :active="request()->routeIs('record_labels.index')">
-                            {{ __('translation.navigation.record_labels') }}
-                        </x-nav-link>
-                    @endcan
-                    @can('users.index')
                         <x-nav-link href="{{ route('albums.index') }}" :active="request()->routeIs('albums.index')">
                             {{ __('translation.navigation.albums') }}
                         </x-nav-link>
@@ -182,11 +177,6 @@
             @can('users.index')
                 <x-responsive-nav-link href="{{ route('genres.index') }}" :active="request()->routeIs('genres.index')">
                     {{ __('translation.navigation.genres') }}
-                </x-responsive-nav-link>
-            @endcan
-            @can('users.index')
-                <x-responsive-nav-link href="{{ route('record_labels.index') }}" :active="request()->routeIs('record_labels.index')">
-                    {{ __('translation.navigation.record_labels') }}
                 </x-responsive-nav-link>
             @endcan
             @can('users.index')

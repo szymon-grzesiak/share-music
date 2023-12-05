@@ -17,10 +17,6 @@ class Song extends Model
     {
         return $this->belongsTo(Album::class);
     }
-    public function record_label()
-    {
-        return $this->belongsTo(RecordLabel::class);
-    }
     public function genres()
     {
         return $this->belongsToMany(Genre::class);
@@ -29,4 +25,9 @@ class Song extends Model
     {
         return $this->belongsTo(User::class, 'artist_id');
     }
+    public function playlists()
+    {
+        return $this->belongsToMany(Playlist::class);
+    }
+
 }

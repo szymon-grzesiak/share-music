@@ -22,8 +22,7 @@ class AlbumsGridView extends GridView
      */
     public $searchBy = [
         'name',
-        'description',
-        'description'
+        'release_date'
     ];
 
     /**
@@ -49,8 +48,9 @@ class AlbumsGridView extends GridView
     {
         return [
             'name' => $model->name,
-            'album_cover' => $model->imageUrl(),
-            'description' => $model->description,
+            'album_cover' => $model->album_cover,
+            'artist' => $model->user->name,
+            'release_date' => $model->release_date,
             'created_at' => $model->created_at,
             ];
     }

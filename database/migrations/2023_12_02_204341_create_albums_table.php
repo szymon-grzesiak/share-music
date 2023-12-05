@@ -15,7 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100)->unique();
             $table->string('album_cover')->nullable();
-            $table->string('description')->nullable();
+            $table->date('release_date')->nullable();
+            $table->unsignedBigInteger('artist_id');
+            $table->foreign('artist_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('no action');
             $table->timestamps();
             $table->softDeletes();
         });

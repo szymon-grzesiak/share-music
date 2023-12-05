@@ -25,11 +25,10 @@ class SongsTableView extends TableView
      */
     public $searchBy = [
         'title',
-        'album_cover',
-        'description',
-        'created_at',
-        'updated_at',
-        'deleted_at',
+        'genres.name',
+        'user.name',
+        'album.name'
+
     ];
 
     /**
@@ -40,10 +39,17 @@ class SongsTableView extends TableView
     public function repository(): Builder
     {
         $query = Song::query()
-            ->with(['album', 'genres', 'record_label', 'user']);
+            ->with(['album', 'genres', 'user'])
+            ->join('users', 'songs.artist_id', '=', 'users.id')
+            ->join('genre_song', 'songs.id', '=', 'genre_song.song_id')
+            ->join('genres', 'genre_song.genre_id', '=', 'genres.id')
+            ->join('albums', 'songs.album_id', '=', 'albums.id')
+            ->select('songs.*', 'users.name as user_name', 'genres.name as genre_name', 'albums.name as album_name');
+
         if (request()->user()->can('manage', Song::class)) {
             $query->withTrashed();
         }
+
         return $query;
     }
 
@@ -55,14 +61,11 @@ class SongsTableView extends TableView
     public function headers(): array
     {
         return [
-            Header::title(__('songs.attributes.title'))->sortBy('title'),
             Header::title(__('albums.attributes.album_cover')),
-            Header::title('Gatunek')->sortBy('name'),
-            Header::title('Wytwornia Muzyczna')->sortBy('name'),
-            Header::title(__('users.attributes.name'))->sortBy('name'),
-            Header::title(__('translation.attributes.created_at'))->sortBy('created_at'),
-            Header::title(__('translation.attributes.updated_at'))->sortBy('updated_at'),
-            Header::title(__('translation.attributes.deleted_at'))->sortBy('deleted_at'),
+            Header::title('Nazwa albumu')->sortBy('albums.name'),
+            Header::title(__('songs.attributes.title'))->sortBy('title'),
+            Header::title('Gatunek')->sortBy('genres.name'),
+            Header::title(__('users.attributes.name'))->sortBy('users.name'),
         ];
     }
 
@@ -76,14 +79,11 @@ class SongsTableView extends TableView
         // Assuming each song has an associated user
 
         return [
-            $model->title,
-            optional($model->album)->album_cover, // Use optional() in case album is null
-            $model->genres->implode('name', ', '), // Implode the genre names
-            optional($model->record_label)->name, // Use optional() in case record_label is null
-            $model->user->name,
-            $model->created_at,
-            $model->updated_at,
-            $model->deleted_at,
+            $model->album ? '<img class="w-14 h-14 mx-auto" src="' . $model->album->album_cover . '" alt="Album Cover" />' : 'No Cover',
+            $model->album ? $model->album->name : 'No Album',
+            $model->title => '<span class="text-red-400">'.$model->title.'</span>',
+            $model->genres->implode('name', ', '),
+            $model->user->name
         ];
     }
 

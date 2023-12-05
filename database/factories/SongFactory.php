@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Album;
-use App\Models\RecordLabel;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Spatie\Permission\Models\Role;
@@ -35,7 +34,6 @@ class SongFactory extends Factory
         return [
             'title' => $this->faker->word,
             'album_id' => Album::select('id')->orderByRaw('RAND()')->first()->id,
-            'record_label_id' => RecordLabel::select('id')->orderByRaw('RAND()')->first()->id,
             'artist_id' => $artistUsers->random(),
             'created_at' => $this->faker->dateTimeBetween(
                 '- 8 weeks',

@@ -13,6 +13,18 @@ class GenreSeeder extends Seeder
      */
     public function run(): void
     {
-        Genre::factory()->count(50)->create();
+        $genres = [
+            'Rock', 'Pop', 'Jazz', 'Classical', 'Blues', 'Reggae', 'Hip-Hop', 'Country',
+            'Electronic', 'Folk', 'Heavy Metal', 'Punk', 'R&B', 'Soul', 'Funk', 'Disco',
+            'House', 'Techno', 'Trance', 'Ambient', 'Gospel', 'Opera', 'Ska', 'Grime',
+            'Dubstep', 'Drum and Bass', 'Industrial', 'Grunge', 'K-Pop', 'J-Pop', 'Latin',
+            'Reggaeton', 'Afrobeat', 'Fado', 'Bossa Nova', 'Flamenco', 'Celtic', 'Country Rock',
+            'Psychedelic Rock', 'Progressive Rock', 'Hard Rock', 'Bluegrass', 'Glam Rock',
+            'Folk Rock', 'Punk Rock', 'Indie Rock', 'Alternative Rock', 'Shoegaze', 'Lo-fi'
+        ];
+
+        foreach ($genres as $genreName) {
+            Genre::create(['name' => $genreName]);
+        }
     }
 }

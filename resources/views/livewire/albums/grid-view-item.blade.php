@@ -2,7 +2,8 @@
 'album_cover' => '',
 'name' => '',
 'created_at' => '',
-'description' => '',
+'release_date' => '',
+'artist' => '',
 'withBackground' => false,
 'model',
 'actions' => [],
@@ -10,48 +11,37 @@
 'selected' => false
 ])
 
-<div class="{{ $withBackground ? 'rounded-md shadow-md' : '' }}">
+<div class="w-fit rounded-3xl glassmorphism{{ $withBackground ? 'rounded-4xl shadow-2xl' : '' }}">
     @if ($hasDefaultAction)
         <a href="#!" wire:click.prevent="onCardClick({{ $model->id }})">
-            <img src="{{ $album_cover }}" alt="{{ $album_cover }}" class="hover:shadow-lg cursor-pointer rounded-md h-48 w-full object-cover {{ $withBackground ? 'rounded-b-none' : '' }} {{ $selected ? variants('gridView.selected') : "" }}">
+            <img src="{{ $album_cover }}" alt="{{ $album_cover }}" class="hover:shadow-lg cursor-pointer rounded-t-md w-[300px] h-[300px] object-cover {{ $withBackground ? 'rounded-b-none' : '' }} {{ $selected ? variants('gridView.selected') : "" }}">
         </a>
     @else
-        <img src="{{ $album_cover }}" alt="{{ $album_cover }}" class="rounded-md h-48 w-full object-cover {{ $withBackground ? 'rounded-b-none' : '' }}  {{ $selected ? variants('gridView.selected') : "" }}">
+        <img src="{{ $album_cover }}" alt="{{ $album_cover }}" class="rounded-t-3xl w-[300px] h-[300px] object-cover {{ $withBackground ? 'rounded-b-none' : '' }}  {{ $selected ? variants('gridView.selected') : "" }}">
     @endif
 
-    <div class="pt-4 {{ $withBackground ? 'bg-white rounded-b-md p-4' : '' }}">
-        <div class="flex items-start">
-            <div class="flex-1">
-                <h3 class="font-bold leading-6 text-gray-900">
-                    @if ($hasDefaultAction)
-                        <a href="#!" class="hover:underline" wire:click.prevent="onCardClick({{ $model->getKey() }})">
-                            {!! $name !!}
-                        </a>
-                    @else
-                        {!! $name !!}
-                    @endif
-                </h3>
-                <span class="text-sm text-gray-600 flex justify-end">
-
-                        <span class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-                            {{ $created_at->format('M d, Y') }}
-                        </span>
-
-        </span>
+    <div class="p-4 pb-6">
+        @if ($hasDefaultAction)
+            <a href="#!" class="hover:underline" wire:click.prevent="onCardClick({{ $model->getKey() }})">
+                {!! $name !!}
+            </a>
+        @else
+            <div class="font-bold text-lg" title="{{ $name }}">
+                {{ strlen($name) > 26 ? substr($name, 0, 26) . '...' : $name }}
             </div>
+        @endif
+            <div class="flex justify-between items-center">
+                <div>{{$artist}}</div>
+                <div class="text-sm text-gray-500">{{ $release_date }}</div>
+            </div>
+
+
 
             @if (count($actions))
                 <div class="flex justify-end items-center">
                     <x-lv-actions.drop-down :actions="$actions" :model="$model" />
                 </div>
             @endif
-        </div>
-
-        @if (isset($description))
-            <p class="line-clamp-3 mt-2">
-                {!! $description !!}
-            </p>
-        @endif
     </div>
 
 </div>

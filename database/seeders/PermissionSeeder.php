@@ -23,8 +23,6 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'users.change_role']);
         Permission::create(['name' => 'genres.index']);
         Permission::create(['name' => 'genres.manage']);
-        Permission::create(['name' => 'record_labels.index']);
-        Permission::create(['name' => 'record_labels.manage']);
         Permission::create(['name' => 'albums.index']);
         Permission::create(['name' => 'albums.manage']);
         Permission::create(['name' => 'songs.index']);
@@ -40,8 +38,6 @@ class PermissionSeeder extends Seeder
         $userRole->givePermissionTo('genres.manage');
         $userRole->givePermissionTo('songs.index');
         $userRole->givePermissionTo('songs.manage');
-        $userRole->givePermissionTo('record_labels.index');
-        $userRole->givePermissionTo('record_labels.manage');
         $userRole->givePermissionTo('albums.index');
         $userRole->givePermissionTo('albums.manage');
 
@@ -51,9 +47,6 @@ class PermissionSeeder extends Seeder
         $userRole->givePermissionTo('songs.index');
         $userRole->givePermissionTo('songs.manage');
         $userRole->givePermissionTo('albums.index');
-
-        // jeden song mo
-        $userRole->givePermissionTo('record_labels.index');
 
 
         // UŻYTKOWNIKA SYSTEMU
@@ -65,8 +58,6 @@ class PermissionSeeder extends Seeder
 //        $userRole->givePermissionTo('playlist.create');
 //        $userRole->givePermissionTo('playlist.edit');
 //        $userRole->givePermissionTo('playlist.destroy');
-        $userRole->givePermissionTo('record_labels.index');
-
 
         // users, artists, albums, songs, genres, playlists
         // zapytać się czy albums może być - czy to jest słownik

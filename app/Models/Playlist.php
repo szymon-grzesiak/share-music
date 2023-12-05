@@ -2,28 +2,27 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Facades\Storage;
 
-
-class Album extends Model
+class Playlist extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
         'name',
-        'album_cover',
+        'description',
+        'image',
     ];
-
     public function songs()
     {
-        return $this->hasMany(Song::class);
+        return $this->belongsToMany(Song::class);
     }
     public function user()
     {
-        return $this->belongsTo(User::class, 'artist_id');
+        return $this->belongsTo(User::class);
     }
 
 

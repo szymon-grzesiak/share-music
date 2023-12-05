@@ -11,21 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('songs', function (Blueprint $table) {
+        Schema::create('playlist_song', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 100);
-            $table->unsignedBigInteger('album_id');
-            $table->unsignedBigInteger('artist_id');
-            $table->foreign('album_id')
+            $table->unsignedBigInteger('song_id');
+            $table->foreign('song_id')
                 ->references('id')
-                ->on('albums')
+                ->on('songs')
                 ->onDelete('no action');
-            $table->foreign('artist_id')
+            $table->unsignedBigInteger('playlist_id');
+            $table->foreign('playlist_id')
                 ->references('id')
-                ->on('users')
+                ->on('playlists')
                 ->onDelete('no action');
-            $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('songs');
+        Schema::dropIfExists('song_playlist');
     }
 };

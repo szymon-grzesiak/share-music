@@ -19,7 +19,7 @@
         @wireUiScripts
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased bg-sky-200">
+    <body class="font-sans antialiased" style="background-image: url('https://res.cloudinary.com/jasberry/image/upload/v1688585130/abstraction_uviu3j.png'); background-size: cover; background: blur(15px);">
         <x-banner />
         <x-wireui-notifications />
         <x-wireui-dialog />
@@ -28,8 +28,8 @@
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <header class="bg-white shadow sticky top-0 z-10">
+                    <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>
