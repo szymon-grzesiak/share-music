@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Song;
+use App\Models\Playlist;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class SongPolicy
+class PlaylistPolicy
 {
     use HandlesAuthorization;
 
@@ -18,7 +18,7 @@ class SongPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->can('songs.index');
+        return $user->can('playlists.index');
     }
 
     /**
@@ -29,45 +29,45 @@ class SongPolicy
      */
     public function create(User $user)
     {
-        return $user->can('songs.manage');
+        return $user->can('playlists.manage');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Song  $song
+     * @param  \App\Models\Playlist  $playlist
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Song $song)
+    public function update(User $user, Playlist $playlist)
     {
-        return $song->deleted_at === null
-            && $user->can('songs.manage');
+        return $playlist->deleted_at === null
+            && $user->can('playlists.manage');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Song  $song
+     * @param  \App\Models\Playlist  $playlist
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Song $song)
+    public function delete(User $user, Playlist $playlist)
     {
-        return $song->deleted_at === null
-            && $user->can('$song.manage');
+        return $playlist->deleted_at === null
+            && $user->can('playlists.manage');
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Song  $song
+     * @param  \App\Models\Playlist  $playlist
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Song $song)
+    public function restore(User $user, Playlist $playlist)
     {
-        return $song->deleted_at !== null
-            && $user->can('songs.manage');
+        return $playlist->deleted_at !== null
+            && $user->can('playlists.manage');
     }
 }

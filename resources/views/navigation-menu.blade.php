@@ -40,6 +40,11 @@
                             {{ __('translation.navigation.songs') }}
                         </x-nav-link>
                     @endcan
+                    @can('users.index')
+                        <x-nav-link href="{{ route('playlists.index') }}" :active="request()->routeIs('playlists.index')">
+                            {{ __('translation.navigation.playlists') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
@@ -189,7 +194,11 @@
                     {{ __('translation.navigation.albums') }}
                 </x-responsive-nav-link>
             @endcan
-
+            @can('users.index')
+                <x-responsive-nav-link href="{{ route('playlists.index') }}" :active="request()->routeIs('playlists.index')">
+                    {{ __('translation.navigation.playlists') }}
+                </x-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->

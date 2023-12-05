@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Http\Livewire\Albums;
+namespace App\Http\Livewire\Playlists;
 
-use App\Http\Livewire\Albums\Filters\InputUserFilter;
-use App\Models\Album;
+
+use App\Models\Playlist;
 use LaravelViews\Views\GridView;
 use Illuminate\Database\Eloquent\Builder;
 
-class AlbumsGridView extends GridView
+class PlaylistsGridView extends GridView
 {
     /**
      * Sets a model class to get the initial data
      */
-    protected $model = Album::class;
+    protected $model = Playlist::class;
 
     public $maxCols = 3;
 
-    public $cardComponent = 'livewire.albums.grid-view-item';
+    public $cardComponent = 'livewire.playlists.grid-view-item';
 
     /**
      * Sets the searchable properties
@@ -26,16 +26,14 @@ class AlbumsGridView extends GridView
         'release_date'
     ];
 
-    protected $paginate = 5;
-
-
     public function sortableBy()
     {
         return [
-            'Album Name' => 'name',
-            'Release Data' => 'release_date'
+            'Name' => 'name',
         ];
     }
+
+    protected $paginate = 5;
 
     /**
      * Sets a initial query with the data to fill the table
@@ -44,8 +42,13 @@ class AlbumsGridView extends GridView
      */
     public function repository(): Builder
     {
-        $query = Album::query();
-        if (request()->user()->can('manage', Album::class)) {
+        $query = Playlist::query()
+            ->with(['user'])
+            ->join('users', 'playlists.user_id', '=', 'users.id')
+            ->select( 'users.name as user_name', 'playlists.*');
+
+
+        if (request()->user()->can('manage', Playlist::class)) {
             $query->withTrashed();
         }
         return $query;
@@ -60,21 +63,10 @@ class AlbumsGridView extends GridView
     {
         return [
             'name' => $model->name,
-            'album_cover' => $model->album_cover,
-            'artist' => $model->user->name,
-            'release_date' => $model->release_date,
-            'created_at' => $model->created_at,
+            'description' => $model->description,
+            'image' => $model->image,
+            'user' => $model->user->name,
             ];
-    }
-
-    /**
-     * Set filters
-     */
-    protected function filters()
-    {
-        return [
-            new InputUserFilter,
-        ];
     }
 }
 

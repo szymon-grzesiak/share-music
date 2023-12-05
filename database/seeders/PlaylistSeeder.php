@@ -16,7 +16,7 @@ class PlaylistSeeder extends Seeder
     {
         $songs = Song::all();
         Playlist::factory()
-            ->count(100)
+            ->count(10)
             ->create()
             ->each(function ($playlist) use ($songs) {
                 $playlist->songs()->attach(

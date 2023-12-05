@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\LogController;
+use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -53,6 +54,10 @@ Route::middleware([
     ]);
 
     Route::resource('songs', SongController::class)->only([
+        'index', 'create', 'edit'
+    ]);
+
+    Route::resource('playlists', PlaylistController::class)->only([
         'index', 'create', 'edit'
     ]);
 });

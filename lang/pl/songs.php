@@ -10,6 +10,11 @@ return [
         'destroy' => 'Usuń piosenkę',
         'restore' => 'Przywróć piosenkę',
     ],
+    'filters' => [
+        'artists' => 'Wykonawca',
+        'albums' => 'Album',
+        'genres' => 'Gatunek',
+    ],
     'labels' => [
         'create_form_title' => 'Tworzenie nowej piosenki',
         'edit_form_title' => 'Edycja piosenki',

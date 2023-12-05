@@ -83,5 +83,6 @@ return [
         'order_wizard' => 'Składanie zamówienia',
         'albums' => 'Albumy',
         'songs' => 'Piosenki',
+        'playlists' => 'Playlisty',
     ],
 ];

@@ -11,7 +11,8 @@ class Song extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name'
+        'title',
+        'duration'
     ];
     public function album()
     {

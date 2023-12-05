@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Http\Livewire\Songs;
+namespace App\Http\Livewire\Playlists;
 
-use App\Http\Livewire\Albums\Actions\RestoreAlbumAction;
-use App\Http\Livewire\Albums\Actions\SoftDeletesAlbumAction;
-use App\Http\Livewire\Filters\SoftDeletedFilter;
-use App\Http\Livewire\Songs\Actions\EditSongAction;
-use App\Http\Livewire\Songs\Filters\InputAlbumFilter;
-use App\Http\Livewire\Songs\Filters\InputArtistFilter;
-use App\Http\Livewire\Songs\Filters\InputGenreFilter;
+use App\Http\Livewire\Playlists\Actions\EditPlaylistAction;
 use App\Models\Album;
 use App\Models\Song;
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\User;
+use WireUi\Traits\Actions;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
-use WireUi\Traits\Actions;
+use LaravelViews\Actions\RedirectAction;
+use Illuminate\Database\Eloquent\Builder;
+use App\Http\Livewire\Filters\SoftDeletedFilter;
+use App\Http\Livewire\Albums\Actions\EditAlbumAction;
+use App\Http\Livewire\Albums\Actions\RestoreAlbumAction;
+use App\Http\Livewire\Albums\Actions\SoftDeletesAlbumAction;
 
-class SongsTableView extends TableView
+class PlaylistsTableView extends TableView
 {
     use Actions;
 
@@ -25,10 +25,10 @@ class SongsTableView extends TableView
      */
     public $searchBy = [
         'title',
-        'duration',
         'genres.name',
         'user.name',
         'album.name'
+
     ];
 
     /**
@@ -63,8 +63,7 @@ class SongsTableView extends TableView
         return [
             Header::title(__('albums.attributes.album_cover')),
             Header::title('Nazwa albumu')->sortBy('albums.name'),
-            Header::title(__('songs.attributes.title'))->sortBy('songs.title'),
-            Header::title('Czas trwania')->sortBy('songs.duration'),
+            Header::title(__('songs.attributes.title'))->sortBy('title'),
             Header::title('Gatunek')->sortBy('genres.name'),
             Header::title(__('users.attributes.name'))->sortBy('users.name'),
         ];
@@ -77,17 +76,12 @@ class SongsTableView extends TableView
      */
     public function row($model): array
     {
-        $seconds = floor($model->duration / 1000);
-        $minutes = floor($seconds / 60);
-        $seconds = $seconds % 60;
-
-        $formattedDuration = sprintf('%02d:%02d', $minutes, $seconds);
+        // Assuming each song has an associated user
 
         return [
             $model->album ? '<img class="w-14 h-14 mx-auto" src="' . $model->album->album_cover . '" alt="Album Cover" />' : 'No Cover',
             $model->album ? $model->album->name : 'No Album',
             $model->title => '<span class="text-red-400">'.$model->title.'</span>',
-            $model->duration => $formattedDuration,
             $model->genres->implode('name', ', '),
             $model->user->name
         ];
@@ -100,10 +94,6 @@ class SongsTableView extends TableView
     {
         return [
             new SoftDeletedFilter,
-            new InputGenreFilter,
-            new InputAlbumFilter,
-            new InputArtistFilter
-
         ];
     }
 

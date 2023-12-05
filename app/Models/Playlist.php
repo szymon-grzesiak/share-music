@@ -39,7 +39,7 @@ class Playlist extends Model
                 if ($value === null) {
                     return null;
                 }
-                return config('filesystems.images_dir') . '/' . $value;
+                return $value;
             },
         );
     }
