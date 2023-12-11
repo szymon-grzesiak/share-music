@@ -29,7 +29,7 @@ You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND L
     @include('laravel-views::components.toolbar.toolbar')
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 {{ $cols[$maxCols] }} gap-8 md:gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 {{ $cols[$maxCols] }} gap-[140px]">
     @foreach ($items as $item)
       <div class="relative">
         @if ($this->hasBulkActions)

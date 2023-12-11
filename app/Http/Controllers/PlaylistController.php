@@ -34,6 +34,17 @@ class PlaylistController extends Controller
         );
     }
 
+    public function songs(Playlist $playlist)
+    {
+        $this->authorize('view', $playlist);
+        return view(
+            'playlists.songs',
+            [
+                'playlist' => $playlist
+            ]
+        );
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -54,4 +65,5 @@ class PlaylistController extends Controller
     {
         return $this->name;
     }
+
 }

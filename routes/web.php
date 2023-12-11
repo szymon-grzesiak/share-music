@@ -60,4 +60,10 @@ Route::middleware([
     Route::resource('playlists', PlaylistController::class)->only([
         'index', 'create', 'edit'
     ]);
+
+    Route::get('/playlists/{playlist}/songs', [PlaylistController::class, 'songs'])
+        ->name('playlists.songs')
+        ->middleware(['permission:playlists.index']);
 });
+
+

@@ -29,6 +29,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'songs.manage']);
         Permission::create(['name' => 'playlists.index']);
         Permission::create(['name' => 'playlists.manage']);
+        Permission::create(['name' => 'playlists.songs']);
 
         // ADMINISTRATOR SYSTEMU
         $userRole = Role::findByName(config('auth.roles.admin'));
@@ -44,6 +45,7 @@ class PermissionSeeder extends Seeder
         $userRole->givePermissionTo('albums.manage');
         $userRole->givePermissionTo('playlists.index');
         $userRole->givePermissionTo('playlists.manage');
+        $userRole->givePermissionTo('playlists.songs');
 
         // ARTYSTA
         $userRole = Role::findByName(config('auth.roles.artist'));

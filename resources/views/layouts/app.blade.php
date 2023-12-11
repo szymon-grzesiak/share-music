@@ -19,7 +19,7 @@
         @wireUiScripts
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased" style="background-image: url('https://res.cloudinary.com/jasberry/image/upload/v1688585130/abstraction_uviu3j.png'); background-size: cover; background: blur(15px);">
+    <body class="font-sans antialiased">
         <x-banner />
         <x-wireui-notifications />
         <x-wireui-dialog />
