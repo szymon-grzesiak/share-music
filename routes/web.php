@@ -69,11 +69,9 @@ Route::middleware([
         ->name('albums.songs')
         ->middleware(['permission:albums.index']);
 
-    Route::get('/artist/{artist}', [UserController::class, 'showArtists'])
-        ->name('users.artists')
-        ->middleware(['permission:users.index']);
-
     Route::get('async/genres', [GenreController::class, 'async'])->name('async.genres');
+    Route::get('async/artists', [UserController::class, 'async'])->name('async.artists');
+
 });
 
 

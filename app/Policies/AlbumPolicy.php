@@ -22,6 +22,17 @@ class AlbumPolicy
     }
 
     /**
+     * Determine whether the user can manage the model.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function manage(User $user)
+    {
+        return $user->can('albums.manage');
+    }
+
+    /**
      * Determine whether the user can create models.
      *
      * @param  \App\Models\User  $user

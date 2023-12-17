@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Http\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -16,10 +16,11 @@ class UserController extends Controller
         );
     }
 
-    public function showArtists($artistId)
+    public function async(Request $request, UserRepository $repository)
     {
-        return User::query()->with('roles');
-
-        return view('albums.songs');
+        return $repository->select(
+            $request->search,
+            $request->selected
+        );
     }
 }

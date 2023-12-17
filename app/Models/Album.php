@@ -53,7 +53,7 @@ class Album extends Model
     public function imageUrl(): string
     {
         return $this->imageExists()
-            ? Storage::url($this->image)
+            ? Storage::url($this->album_cover)
             : Storage::url(
                 config('filesystems.default_image')
             );
@@ -66,7 +66,7 @@ class Album extends Model
      */
     public function imageExists(): bool
     {
-        return $this->image !== null
-            && Storage::disk('public')->exists($this->image);
+        return $this->album_cover !== null
+            && Storage::disk('public')->exists($this->album_cover);
     }
 }
