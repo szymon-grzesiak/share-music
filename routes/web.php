@@ -73,7 +73,7 @@ Route::middleware([
         ->name('users.artists')
         ->middleware(['permission:users.index']);
 
-    // TODO: zrobić /artist/{artistId} i /artists/{artist}/albums
+    Route::get('async/genres', [GenreController::class, 'async'])->name('async.genres');
 });
 
 

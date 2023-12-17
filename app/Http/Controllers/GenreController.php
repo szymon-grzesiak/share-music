@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repositories\GenreRepository;
 use App\Models\Genre;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class GenreController extends Controller
@@ -19,6 +21,22 @@ class GenreController extends Controller
             'genres.index'
         );
     }
+
+
+    /**
+     * Return list of resources
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function async(Request $request, GenreRepository $repository)
+    {
+        return $repository->select(
+            $request->search,
+            $request->selected
+        );
+    }
+
 
     /**
      * Show the form for creating a new resource.

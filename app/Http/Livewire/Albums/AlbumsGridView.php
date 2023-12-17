@@ -26,7 +26,7 @@ class AlbumsGridView extends GridView
         'release_date'
     ];
 
-    protected $paginate = 5;
+    protected $paginate = 6;
 
 
     public function sortableBy()
