@@ -21,21 +21,26 @@
                     <img src="{{ $album_cover }}" alt="{{ $album_cover }}" class=" cursor-pointer rounded-t-md w-[300px] h-[300px] object-cover {{ $withBackground ? 'rounded-b-none' : '' }} {{ $selected ? variants('gridView.selected') : "" }}">
                 </a>
             @else
-                <img src="{{ $album_cover }}" alt="{{ $album_cover }}" class="rounded-t-3xl  w-[300px] h-[300px] object-cover {{ $withBackground ? 'rounded-b-none' : '' }}  {{ $selected ? variants('gridView.selected') : "" }}">
-            @endif
+                <a href="{{ route('albums.songs', ['album' => $model->id]) }}" >
+                    <img src="{{ $album_cover }}" alt="{{ $album_cover }}" class="rounded-t-3xl  w-[300px] h-[300px] object-cover {{ $withBackground ? 'rounded-b-none' : '' }}  {{ $selected ? variants('gridView.selected') : "" }}">
+                </a>
+                    @endif
             <div class="cd-hole" style="width: 40px; height: 40px; background: #fff; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
         </div>
     </div>
 
-    <div class="-z-10 pl-5  w-full p-4 pb-6 bg-white/40 rounded-xl">
+    <div class="-z-10 pl-5  w-full p-4 pb-6 bg-white/40">
         @if ($hasDefaultAction)
             <a href="#!" class="hover:underline" wire:click.prevent="onCardClick({{ $model->getKey() }})">
                 {!! $name !!}
             </a>
         @else
             <div class="font-bold text-lg hover:underline hover:cursor-pointer" title="{{ $name }}">
-                {{ strlen($name) > 26 ? substr($name, 0, 26) . '...' : $name }}
+                <a href="{{ route('albums.songs', ['album' => $model->id]) }}" >
+                    {{ strlen($model->name) > 26 ? substr($model->name, 0, 26) . '...' : $model->name }}
+                </a>
             </div>
+
         @endif
             <div class="flex justify-between items-center">
                 <div>{{$artist}}</div>

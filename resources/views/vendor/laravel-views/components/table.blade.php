@@ -8,9 +8,9 @@ props:
   - itmes
   - actionsByRow --}}
 
-<table class="min-w-full">
+<table class="min-w-full bg-white/60  ">
 
-  <thead class="border-b border-t border-gray-200 bg-gray-100 text-xs leading-4 font-semibold uppercase tracking-wider text-left">
+  <thead id="theadId" style="background-color: rgb(30, 30, 65)" class="border-b sticky top-0 z-10 text-xs leading-4 text-white font-semibold uppercase tracking-wider text-left">
     <tr>
       @if ($this->hasBulkActions)
         <th class="pl-3">
@@ -49,7 +49,7 @@ props:
     </tr>
   </thead>
 
-  <tbody>
+  <tbody class="[&>*:nth-child(even)]:bg-white/20">
     @foreach ($items as $item)
       <tr class="border-b border-gray-200 text-sm" wire:key="{{ $item->getKey() }}">
         @if ($this->hasBulkActions)

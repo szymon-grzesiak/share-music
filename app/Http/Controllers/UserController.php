@@ -15,4 +15,11 @@ class UserController extends Controller
             'users.index',
         );
     }
+
+    public function showArtists($artistId)
+    {
+        return User::query()->with('roles');
+
+        return view('albums.songs');
+    }
 }

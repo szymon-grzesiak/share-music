@@ -1,24 +1,28 @@
 <?php
 
-namespace App\Http\Livewire\Songs;
+namespace App\Http\Livewire\Albums;
 
-use App\Http\Livewire\Albums\Actions\RestoreAlbumAction;
-use App\Http\Livewire\Albums\Actions\SoftDeletesAlbumAction;
-use App\Http\Livewire\Filters\SoftDeletedFilter;
-use App\Http\Livewire\Songs\Actions\EditSongAction;
 use App\Http\Livewire\Songs\Filters\InputAlbumFilter;
 use App\Http\Livewire\Songs\Filters\InputArtistFilter;
 use App\Http\Livewire\Songs\Filters\InputGenreFilter;
 use App\Models\Album;
 use App\Models\Song;
-use Illuminate\Database\Eloquent\Builder;
+use WireUi\Traits\Actions;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
-use WireUi\Traits\Actions;
+use LaravelViews\Actions\RedirectAction;
+use Illuminate\Database\Eloquent\Builder;
+use App\Http\Livewire\Filters\SoftDeletedFilter;
+use App\Http\Livewire\Albums\Actions\EditAlbumAction;
+use App\Http\Livewire\Albums\Actions\RestoreAlbumAction;
+use App\Http\Livewire\Albums\Actions\SoftDeletesAlbumAction;
 
-class SongsTableView extends TableView
+class SpecificAlbumTableView extends TableView
 {
     use Actions;
+
+    public $albumId;
+
 
     /**
      * Sets the searchable properties
@@ -44,11 +48,8 @@ class SongsTableView extends TableView
             ->join('genre_song', 'songs.id', '=', 'genre_song.song_id')
             ->join('genres', 'genre_song.genre_id', '=', 'genres.id')
             ->join('albums', 'songs.album_id', '=', 'albums.id')
-            ->select('songs.*', 'users.name as user_name', 'genres.name as genre_name', 'albums.name as album_name');
-
-        if (request()->user()->can('manage', Song::class)) {
-            $query->withTrashed();
-        }
+            ->select('songs.*', 'users.name as user_name', 'genres.name as genre_name', 'albums.name as album_name', 'albums.album_cover as album_cover', 'albums.id as album_id')
+            ->where('albums.id', '=', $this->albumId);
 
         return $query;
     }
@@ -62,7 +63,6 @@ class SongsTableView extends TableView
     {
         return [
             Header::title(__('albums.attributes.album_cover')),
-            Header::title('Nazwa albumu')->sortBy('albums.name'),
             Header::title(__('songs.attributes.title'))->sortBy('songs.title'),
             Header::title('Czas trwania')->sortBy('songs.duration'),
             Header::title('Gatunek')->sortBy('genres.name'),
@@ -85,11 +85,10 @@ class SongsTableView extends TableView
 
         return [
             $model->album ? '<img class="w-14 h-14 mx-auto" src="' . $model->album->album_cover . '" alt="Album Cover" />' : 'No Cover',
-            $model->album ? '<span class="hover:underline"><a href="albums?sortOrder=asc&search=' . $model->album->name . '">' . $model->album->name . '</a></span>' : 'No Album',
-            'title' => '<span >' . $model->title . '</span>',
-            'duration' => $formattedDuration,
-            'genres' => $model->genres->implode('name', ', '),
-            $model->user ? '<span class="hover:underline"><a href="albums?sortOrder=asc&filters[input-user-filter]=' . $model->user->name . '">' . $model->user->name . '</a></span>' : 'No User'
+            $model->title => '<span class="text-red-400">'.$model->title.'</span>',
+            $model->duration => $formattedDuration,
+            $model->genres->implode('name', ', '),
+            $model->user->name
         ];
     }
 
@@ -110,7 +109,7 @@ class SongsTableView extends TableView
     protected function actionsByRow()
     {
         return [
-            new EditSongAction(
+            new EditAlbumAction(
                 'albums.edit',
                 __('albums.actions.edit')
             ),

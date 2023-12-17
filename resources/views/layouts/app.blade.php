@@ -28,7 +28,7 @@
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white shadow sticky top-0 z-10">
+                <header id="headerId" class="shadow" style="background-color: rgb(30,30,65)">
                     <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
@@ -42,7 +42,6 @@
         </div>
 
         @stack('modals')
-
         @livewireScripts
         @laravelViewsScripts('laravel-views')
     </body>

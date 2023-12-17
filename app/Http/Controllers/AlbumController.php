@@ -50,6 +50,13 @@ class AlbumController extends Controller
             ]
         );
     }
+    public function showSongs($albumId)
+    {
+        $album = Album::with(['songs'])->findOrFail($albumId);
+        // 'songs' to nazwa relacji zdefiniowana w modelu Album
+
+        return view('albums.songs', compact('album'));
+    }
     public function __toString()
     {
         return $this->name;

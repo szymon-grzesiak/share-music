@@ -18,7 +18,7 @@ class AlbumPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->can('albums.index');
+        return  $user->can('albums.index');
     }
 
     /**

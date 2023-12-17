@@ -64,6 +64,16 @@ Route::middleware([
     Route::get('/playlists/{playlist}/songs', [PlaylistController::class, 'songs'])
         ->name('playlists.songs')
         ->middleware(['permission:playlists.index']);
+
+    Route::get('/album/{album}', [AlbumController::class, 'showSongs'])
+        ->name('albums.songs')
+        ->middleware(['permission:albums.index']);
+
+    Route::get('/artist/{artist}', [UserController::class, 'showArtists'])
+        ->name('users.artists')
+        ->middleware(['permission:users.index']);
+
+    // TODO: zrobić /artist/{artistId} i /artists/{artist}/albums
 });
 
 

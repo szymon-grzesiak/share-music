@@ -38,7 +38,7 @@ body::before {
 
     background-image: url('https://res.cloudinary.com/jasberry/image/upload/v1688585130/abstraction_uviu3j.png');
     background-size: cover;
-    filter: blur(15px);
+    filter: blur(50px);
 }
 
 body {
@@ -75,15 +75,32 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50px; /* Adjust the size as needed */
-    height: 50px; /* Adjust the size as needed */
+    width: 50px;
+    height: 50px;
     background: transparent;
     border-radius: 50%;
-    box-shadow: 0 0 0 3px #fff; /* Adjust the size of the border as needed */
+    box-shadow: 0 0 0 3px #fff;
 }
 
 .shadow-4xl {
     -webkit-box-shadow: 6px 100px 100px -74px rgba(0, 0, 0, 1);
     -moz-box-shadow: 6px 100px 100px -74px rgba(0, 0, 0, 1);
     box-shadow: 6px 100px 100px -74px rgba(0, 0, 0, 1);
+}
+
+#headerId {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+#theadId {
+    position: sticky;
+    top: 49px;
+    z-index: 9;
+}
+@media (max-width: 1024px) {
+    #theadId {
+        top: 0;
+    }
 }

@@ -19,7 +19,8 @@ props:
     {{ $label ?? '' }}
   </label>
   <input
-    class="appearance-none w-full bg-white border-gray-300 hover:border-gray-500 px-3 py-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 focus:border-2 border"
+    class="appearance-none w-full bg-white/50 hover:border-gray-500 px-3 py-2 pr-8 rounded-3xl  leading-tight focus:outline-none focus:bg-white/80 focus:border-gray-500 focus:border-2 border"
+    style="border: 1px solid rgb(30,30,65);"
     type="text"
     name="{{ $name ?? '' }}"
     placeholder="{{ $placeholder ?? ''}}"

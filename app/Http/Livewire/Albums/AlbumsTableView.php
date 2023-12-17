@@ -23,7 +23,6 @@ class AlbumsTableView extends TableView
     public $searchBy = [
         'name',
         'album_cover',
-        'description',
         'created_at',
         'updated_at',
         'deleted_at',
