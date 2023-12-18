@@ -59,7 +59,7 @@ class PermissionSeeder extends Seeder
 
         // UŻYTKOWNIKA SYSTEMU
         $userRole = Role::findByName(config('auth.roles.user'));
-        $userRole->givePermissionTo('genres.index');
+//        $userRole->givePermissionTo('genres.index');
         $userRole->givePermissionTo('albums.index');
         $userRole->givePermissionTo('songs.index');
         $userRole->givePermissionTo('playlists.index');
@@ -69,8 +69,5 @@ class PermissionSeeder extends Seeder
 //        $userRole->givePermissionTo('playlist.edit');
 //        $userRole->givePermissionTo('playlist.destroy');
 
-        // users, artists, albums, songs, genres, playlists
-        // zapytać się czy albums może być - czy to jest słownik
-        // może wydawnictwo muzyczne ale nie wiem
     }
 }

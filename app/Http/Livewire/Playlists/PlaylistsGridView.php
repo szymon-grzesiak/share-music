@@ -3,12 +3,20 @@
 namespace App\Http\Livewire\Playlists;
 
 
+use App\Http\Livewire\Traits\Restore;
+use App\Http\Livewire\Traits\SoftDeletes;
 use App\Models\Playlist;
 use LaravelViews\Views\GridView;
 use Illuminate\Database\Eloquent\Builder;
+use WireUi\Traits\Actions;
 
 class PlaylistsGridView extends GridView
 {
+
+    use Actions;
+    use SoftDeletes;
+    use Restore;
+
     /**
      * Sets a model class to get the initial data
      */
@@ -23,7 +31,7 @@ class PlaylistsGridView extends GridView
      */
     public $searchBy = [
         'name',
-        'release_date'
+        'user.name'
     ];
 
     public function sortableBy()
@@ -42,14 +50,12 @@ class PlaylistsGridView extends GridView
      */
     public function repository(): Builder
     {
-        $query = Playlist::query()
-            ->with(['user'])
-            ->join('users', 'playlists.user_id', '=', 'users.id')
-            ->select( 'users.name as user_name', 'playlists.*');
+        $query = Playlist::query()->with(['user']);
 
-
-        if (request()->user()->can('manage', Playlist::class)) {
+        if (request()->user()->can('playlists.manage')) {
             $query->withTrashed();
+        } else {
+            $query->where('user_id', auth()->id());
         }
         return $query;
     }
@@ -66,7 +72,7 @@ class PlaylistsGridView extends GridView
             'description' => $model->description,
             'image' => $model->image,
             'user' => $model->user->name,
-            ];
+        ];
     }
 }
 

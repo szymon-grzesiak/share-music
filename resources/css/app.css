@@ -104,3 +104,31 @@ body {
         top: 0;
     }
 }
+
+.buttonStyle {
+    background-color: rgb(30,30,65);
+    color: white;
+    z-index: 10;
+    transition: 0.2s ease-in;
+
+}
+.buttonStyle:hover {
+    background-color: white;
+    color: rgb(30,30,65);
+}
+
+.buttonStyle:hover::before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: 'Dodaj piosenkę';
+    font-size: 14px;
+    font-weight: 700;
+    padding: 3px 10px 3px 5px;
+    background-color: white;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: -120px;
+    border-radius: 20px;
+}

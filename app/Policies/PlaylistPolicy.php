@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Playlist;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Spatie\Permission\Models\Role;
 
 class PlaylistPolicy
 {
@@ -19,6 +20,17 @@ class PlaylistPolicy
     public function viewAny(User $user)
     {
         return $user->can('playlists.index');
+    }
+
+    public function view(User $user, Playlist $playlist)
+    {
+        $adminRole = Role::where('name', 'admin')->first();
+
+        if ($adminRole && $user->hasRole($adminRole->name)) {
+            return true; // Administratorzy mają dostęp do wszystkich playlistów
+        }
+
+        return $user->id === $playlist->user_id;
     }
 
     /**

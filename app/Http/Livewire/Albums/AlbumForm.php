@@ -34,13 +34,6 @@ class AlbumForm extends Component
             'album.artist_id' => 'nullable|integer|exists:users,id',
         ];
 
-        if ($this->editMode && !$this->album_cover) {
-            // If in edit mode and no new album cover is uploaded, don't apply 'image' validation
-            $rules['album.album_cover'] = 'nullable|max:1024';
-        } else {
-            // Apply 'image' validation only when a new image is being uploaded
-            $rules['album.album_cover'] = 'nullable|image|max:1024';
-        }
 
         return $rules;
     }

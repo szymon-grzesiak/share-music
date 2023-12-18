@@ -28,9 +28,9 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/explore', function () {
+        return view('explore');
+    })->name('explore');
 
     Route::name('users.')->prefix('users')->group(function () {
         Route::get('', [UserController::class, 'index'])
@@ -61,7 +61,7 @@ Route::middleware([
         'index', 'create', 'edit'
     ]);
 
-    Route::get('/playlists/{playlist}/songs', [PlaylistController::class, 'songs'])
+    Route::get('/playlists/{playlist}', [PlaylistController::class, 'songs'])
         ->name('playlists.songs')
         ->middleware(['permission:playlists.index']);
 
@@ -69,9 +69,11 @@ Route::middleware([
         ->name('albums.songs')
         ->middleware(['permission:albums.index']);
 
+
+
     Route::get('async/genres', [GenreController::class, 'async'])->name('async.genres');
     Route::get('async/artists', [UserController::class, 'async'])->name('async.artists');
-
+    Route::get('async/albums', [AlbumController::class, 'async'])->name('async.albums');
 });
 
 

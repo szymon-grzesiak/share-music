@@ -33,17 +33,14 @@ class PlaylistController extends Controller
             'playlists.form'
         );
     }
-
-    public function songs(Playlist $playlist)
+    public function songs($playlistId)
     {
+        $playlist = Playlist::with(['songs'])->findOrFail($playlistId);
         $this->authorize('view', $playlist);
-        return view(
-            'playlists.songs',
-            [
-                'playlist' => $playlist
-            ]
-        );
+
+        return view('playlists.songs', compact('playlist'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

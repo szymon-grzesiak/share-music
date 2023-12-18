@@ -6,18 +6,21 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="w-full mx-auto sm:px-6 lg:px-8">
+        <div class="w-full mx-auto pr-14">
             <div class="sm:rounded-lg table-view-wrapper">
                     @can('create', App\Models\Song::class)
-                        <x-wireui-button primary
-                                         label="+"
-                                         title="Dodaj piosenkę"
-                                         href="{{ route('songs.create') }}"
-                                         class="justify-self-end text-3xl bg-blue-300 hover:bg-blue-500 rounded-full fixed bottom-0 left-0 ml-10 mb-6 w-14 h-14" />
+                        <a
+                            title="Dodaj piosenkę"
+                            href="{{ route('songs.create') }}"
+                            class="buttonStyle flex justify-center items-center text-3xl rounded-full fixed bottom-0 right-0 mr-2 mb-6 w-12 h-12" >
+                           +
+                        </a>
                     @endcan
                 <livewire:songs.songs-table-view />
             </div>
         </div>
     </div>
 </x-app-layout>
+
+
 

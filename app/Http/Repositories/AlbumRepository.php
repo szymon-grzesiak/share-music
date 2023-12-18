@@ -2,15 +2,15 @@
 
 namespace App\Http\Repositories;
 
-use App\Models\User;
+use App\Models\Album;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
-class UserRepository
+class AlbumRepository
 {
     public function select(string|null $search, array|null $selected): Collection
     {
-        return User::query()
+        return Album::query()
             ->select('id', 'name')
             ->orderBy('name')
             ->when(

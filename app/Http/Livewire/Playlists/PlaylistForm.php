@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Songs;
+namespace App\Http\Livewire\Playlists;
 
 use Livewire\Component;
 use App\Models\Song;
@@ -8,7 +8,7 @@ use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class AlbumForm extends Component
+class PlaylistForm extends Component
 {
     use Actions;
     use AuthorizesRequests;

@@ -36,9 +36,21 @@
             @endif
 
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            <div class="flex">
+                <aside class="bg-[rgb(30,30,65)] light-border custom-scrollbar sticky left-0 top-0 h-screen overflow-y-auto border-r p-6 pt-12 w-[266px]">
+                    <h2 class="text-white text-4xl">Biblioteka</h2>
+                    <div>
+                        <ul>
+                            @foreach ($playlists as $playlist)
+                                <li class="text-white">{{ $playlist->name }}</li> <!-- Display playlist name -->
+                            @endforeach
+                        </ul>
+                    </div>
+                </aside>
+                <main class="w-full"> <!-- Adjust the margin-left to match the width of the aside -->
+                    {{ $slot }}
+                </main>
+            </div>
         </div>
 
         @stack('modals')

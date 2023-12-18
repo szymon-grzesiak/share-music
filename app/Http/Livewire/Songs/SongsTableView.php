@@ -6,12 +6,17 @@ use App\Http\Livewire\Albums\Actions\RestoreAlbumAction;
 use App\Http\Livewire\Albums\Actions\SoftDeletesAlbumAction;
 use App\Http\Livewire\Filters\SoftDeletedFilter;
 use App\Http\Livewire\Songs\Actions\EditSongAction;
+use App\Http\Livewire\Songs\Actions\RestoreSongAction;
+use App\Http\Livewire\Songs\Actions\SoftDeletesSongAction;
 use App\Http\Livewire\Songs\Filters\InputAlbumFilter;
 use App\Http\Livewire\Songs\Filters\InputArtistFilter;
 use App\Http\Livewire\Songs\Filters\InputGenreFilter;
+use App\Http\Livewire\Traits\Restore;
+use App\Http\Livewire\Traits\SoftDeletes;
 use App\Models\Album;
 use App\Models\Song;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use WireUi\Traits\Actions;
@@ -19,6 +24,8 @@ use WireUi\Traits\Actions;
 class SongsTableView extends TableView
 {
     use Actions;
+    use SoftDeletes;
+    use Restore;
 
     /**
      * Sets the searchable properties
@@ -39,12 +46,7 @@ class SongsTableView extends TableView
     public function repository(): Builder
     {
         $query = Song::query()
-            ->with(['album', 'genres', 'user'])
-            ->join('users', 'songs.artist_id', '=', 'users.id')
-            ->join('genre_song', 'songs.id', '=', 'genre_song.song_id')
-            ->join('genres', 'genre_song.genre_id', '=', 'genres.id')
-            ->join('albums', 'songs.album_id', '=', 'albums.id')
-            ->select('songs.*', 'users.name as user_name', 'genres.name as genre_name', 'albums.name as album_name');
+            ->with(['album', 'genres', 'user']);
 
         if (request()->user()->can('manage', Song::class)) {
             $query->withTrashed();
@@ -111,35 +113,24 @@ class SongsTableView extends TableView
     {
         return [
             new EditSongAction(
-                'albums.edit',
-                __('albums.actions.edit')
+                'songs.edit',
+                __('songs.actions.edit')
             ),
-            new SoftDeletesAlbumAction(),
-            new RestoreAlbumAction(),
+            new SoftDeletesSongAction(),
+            new RestoreSongAction(),
         ];
     }
-
-    public function softDeletes(int $id)
+    protected function softDeletesNotificationDescription(Model $model)
     {
-        $album = Album::find($id);
-        $album->delete();
-        $this->notification()->success(
-            $title = __('translation.messages.successes.destroyed_title'),
-            $description = __('albums.messages.successes.destroyed', [
-                'name' => $album->name
-            ])
-        );
+        return __('songs.messages.successes.destroyed', [
+            'name' => $model->name
+        ]);
     }
 
-    public function restore(int $id)
+    protected function restoreNotificationDescription(Model $model)
     {
-        $album = Album::withTrashed()->find($id);
-        $album->restore();
-        $this->notification()->success(
-            $title = __('translation.messages.successes.restored_title'),
-            $description = __('albums.messages.successes.restored', [
-                'name' => $album->name
-            ])
-        );
+        return __('songs.messages.successes.restored', [
+            'name' => $model->name
+        ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repositories\AlbumRepository;
 use App\Models\Album;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,14 @@ class AlbumController extends Controller
         $this->authorize('viewAny', Album::class);
         return view(
             'albums.index'
+        );
+    }
+
+    public function async(Request $request, AlbumRepository $repository)
+    {
+        return $repository->select(
+            $request->search,
+            $request->selected
         );
     }
 

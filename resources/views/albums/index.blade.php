@@ -9,11 +9,12 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class=" sm:rounded-lg p-4" id="table-view-wrapper">
                 @can('create', App\Models\Album::class)
-                    <x-wireui-button primary
-                                     label="+"
-                                     title="Dodaj album"
-                                     href="{{ route('albums.create') }}"
-                                     class="justify-self-end text-3xl bg-blue-300 hover:bg-blue-500 rounded-full fixed bottom-0 left-0 ml-10 mb-6 w-14 h-14" />
+                    <a
+                        title="Dodaj piosenkę"
+                        href="{{ route('albums.create') }}"
+                        class="buttonStyle flex justify-center items-center text-3xl rounded-full fixed bottom-0 right-0 mr-2 mb-6 w-12 h-12" >
+                        +
+                    </a>
                 @endcan
                 <livewire:albums.albums-grid-view />
             </div>

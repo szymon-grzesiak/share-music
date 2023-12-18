@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\Albums;
+namespace App\Http\Livewire\Playlists;
 
 use App\Http\Livewire\Songs\Filters\InputAlbumFilter;
 use App\Http\Livewire\Songs\Filters\InputArtistFilter;
 use App\Http\Livewire\Songs\Filters\InputGenreFilter;
 use App\Models\Album;
+use App\Models\Playlist;
 use App\Models\Song;
 use WireUi\Traits\Actions;
 use LaravelViews\Facades\Header;
@@ -17,22 +18,18 @@ use App\Http\Livewire\Albums\Actions\EditAlbumAction;
 use App\Http\Livewire\Albums\Actions\RestoreAlbumAction;
 use App\Http\Livewire\Albums\Actions\SoftDeletesAlbumAction;
 
-class SpecificAlbumTableView extends TableView
+class SpecificPlaylistTableView extends TableView
 {
     use Actions;
 
-    public $albumId;
+    public $playlistId;
 
 
     /**
      * Sets the searchable properties
      */
     public $searchBy = [
-        'title',
-        'duration',
-        'genres.name',
-        'user.name',
-        'album.name'
+        'name',
     ];
 
     /**
@@ -42,17 +39,9 @@ class SpecificAlbumTableView extends TableView
      */
     public function repository(): Builder
     {
-        $query = Song::query()
-            ->with(['album', 'genres', 'user'])
-            ->join('users', 'songs.artist_id', '=', 'users.id')
-            ->join('genre_song', 'songs.id', '=', 'genre_song.song_id')
-            ->join('genres', 'genre_song.genre_id', '=', 'genres.id')
-            ->join('albums', 'songs.album_id', '=', 'albums.id')
-            ->select('songs.*', 'users.name as user_name', 'genres.name as genre_name', 'albums.name as album_name', 'albums.album_cover as album_cover', 'albums.id as album_id')
-            ->where('albums.id', '=', $this->albumId);
-
-        return $query;
+        return Playlist::find($this->playlistId)->songs()->getQuery();
     }
+
 
     /**
      * Sets the headers of the table as you want to be displayed
@@ -62,13 +51,13 @@ class SpecificAlbumTableView extends TableView
     public function headers(): array
     {
         return [
-            Header::title(__('albums.attributes.album_cover')),
-            Header::title(__('songs.attributes.title'))->sortBy('songs.title'),
-            Header::title('Czas trwania')->sortBy('songs.duration'),
-            Header::title('Gatunek')->sortBy('genres.name'),
-            Header::title(__('users.attributes.name'))->sortBy('users.name'),
+            'ID',
+            'Title',
+            'Duration',
+            // Other headers for song attributes
         ];
     }
+
 
     /**
      * Sets the data to every cell of a single row
@@ -82,14 +71,16 @@ class SpecificAlbumTableView extends TableView
         $seconds = $seconds % 60;
 
         $formattedDuration = sprintf('%02d:%02d', $minutes, $seconds);
-
         return [
-            $model->album ? '<img class="w-14 h-14 mx-auto" src="' . $model->album->album_cover . '" alt="Album Cover" />' : 'No Cover',
-            $model->title => '<span class="text-red-400">'.$model->title.'</span>',
-            $model->duration => $formattedDuration,
-            $model->genres->implode('name', ', '),
-            $model->user ? '<span class="hover:underline"><a href="../albums?sortOrder=asc&filters[input-user-filter]=' . $model->user->name . '">' . $model->user->name . '</a></span>' : 'No User'
+            'id' => $model->id,
+            'title' => $model->title,
+            'duration' => $formattedDuration,
+            // Include other song attributes you wish to display
         ];
+    }
+    public function mount($playlistId)
+    {
+        $this->playlistId = $playlistId;
     }
 
     /**

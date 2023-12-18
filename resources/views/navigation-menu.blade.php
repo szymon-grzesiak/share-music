@@ -5,42 +5,42 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('explore') }}">
                         <img class="object-fit w-[80px] h-[50px]" alt="Moje Zdjęcie" src="https://res.cloudinary.com/jasberry/image/upload/f_auto,q_auto/peyybbciqzckok10izyj" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link href="{{ route('explore') }}" :active="request()->routeIs('explore')">
+                        {{ __('Explore') }}
                     </x-nav-link>
                     @can('users.index')
                         <x-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                             {{ __('translation.navigation.users') }}
                         </x-nav-link>
                     @endcan
-                    @can('users.index')
+                    @can('logs.index')
                         <x-nav-link href="{{ route('logs.index') }}" :active="request()->routeIs('logs.index')">
                             {{ __('translation.navigation.logs') }}
                         </x-nav-link>
                     @endcan
-                    @can('users.index')
+                    @can('genres.index')
                         <x-nav-link href="{{ route('genres.index') }}" :active="request()->routeIs('genres.index')">
                             {{ __('translation.navigation.genres') }}
                         </x-nav-link>
                     @endcan
-                    @can('users.index')
+                    @can('albums.index')
                         <x-nav-link href="{{ route('albums.index') }}" :active="request()->routeIs('albums.index')">
                             {{ __('translation.navigation.albums') }}
                         </x-nav-link>
                     @endcan
-                    @can('users.index')
+                    @can('songs.index')
                         <x-nav-link href="{{ route('songs.index') }}" :active="request()->routeIs('songs.index')">
                             {{ __('translation.navigation.songs') }}
                         </x-nav-link>
                     @endcan
-                    @can('users.index')
+                    @can('playlists.index')
                         <x-nav-link href="{{ route('playlists.index') }}" :active="request()->routeIs('playlists.index')">
                             {{ __('translation.navigation.playlists') }}
                         </x-nav-link>
@@ -166,8 +166,8 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link href="{{ route('explore') }}" :active="request()->routeIs('explore')">
+                {{ __('Explore') }}
             </x-responsive-nav-link>
             @can('users.index')
                 <x-responsive-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">

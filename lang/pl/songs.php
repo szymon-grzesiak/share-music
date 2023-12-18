@@ -3,6 +3,10 @@
 return [
     'attributes' => [
         'title' => 'Tytuł',
+        'artist' => 'Wykonawca',
+        'album' => 'Album',
+        'genres' => 'Gatunki',
+        'duration' => 'Czas trwania',
     ],
     'actions' => [
         'create' => 'Dodaj piosenkę',

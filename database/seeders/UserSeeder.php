@@ -95,5 +95,17 @@ class UserSeeder extends Seeder
         if (isset($userRole)) {
             $user->assignRole($userRole);
         }
+
+
+        $user = User::create([
+            'name' => 'Użytkownik Testowy2',
+            'email' => 'user2.test@localhost',
+            'email_verified_at' => Carbon::now(),
+            'password' => Hash::make('12345678'),
+        ]);
+        $userRole = Role::findByName(config('auth.roles.user'));
+        if (isset($userRole)) {
+            $user->assignRole($userRole);
+        }
     }
 }

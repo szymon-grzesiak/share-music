@@ -25,10 +25,12 @@
             {!! $name !!}
         </a>
         @else
-        <div class="font-bold text-lg" title="{{ $name }}">
-            {{ strlen($description) > 26 ? substr($name, 0, 26) . '...' : $description }}
-        </div>
         @endif
+            <div class="font-bold text-lg hover:underline hover:cursor-pointer" title="{{ $name }}">
+                <a href="{{ route('playlists.songs', ['playlist' => $model->id]) }}" >
+                    {{ strlen($model->name) > 26 ? substr($model->name, 0, 26) . '...' : $model->name }}
+                </a>
+            </div>
         <div class="flex justify-between items-center">
             <div>{{$user}}</div>
         </div>
