@@ -5,6 +5,8 @@ namespace App\Policies;
 use App\Models\Song;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class SongPolicy
 {
@@ -41,8 +43,13 @@ class SongPolicy
      */
     public function update(User $user, Song $song)
     {
-        return $song->deleted_at === null
-            && $user->can('songs.manage');
+        // Admin może edytować wszystkie piosenki
+        if ($user->hasRole('admin')) {
+            return true;
+        }
+
+        // Artysta może edytować tylko swoje piosenki
+        return $song->deleted_at === null && $user->id === $song->artist_id;
     }
 
     /**
@@ -54,8 +61,13 @@ class SongPolicy
      */
     public function delete(User $user, Song $song)
     {
-        return $song->deleted_at === null
-            && $user->can('$song.manage');
+        // Admin może usuwać wszystkie piosenki
+        if ($user->hasRole('admin')) {
+            return true;
+        }
+
+        // Artysta może usuwać tylko swoje piosenki
+        return $song->deleted_at === null && $user->id === $song->artist_id;
     }
 
     /**
@@ -67,7 +79,6 @@ class SongPolicy
      */
     public function restore(User $user, Song $song)
     {
-        return $song->deleted_at !== null
-            && $user->can('songs.manage');
+        return $song->deleted_at !== null && $user->hasRole('admin');
     }
 }

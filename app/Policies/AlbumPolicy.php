@@ -3,8 +3,11 @@
 namespace App\Policies;
 
 use App\Models\Album;
+use App\Models\Song;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class AlbumPolicy
 {
@@ -18,18 +21,7 @@ class AlbumPolicy
      */
     public function viewAny(User $user)
     {
-        return  $user->can('albums.index');
-    }
-
-    /**
-     * Determine whether the user can manage the model.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function manage(User $user)
-    {
-        return $user->can('albums.manage');
+        return $user->can('albums.index');
     }
 
     /**
@@ -52,8 +44,13 @@ class AlbumPolicy
      */
     public function update(User $user, Album $album)
     {
-        return $album->deleted_at === null
-            && $user->can('albums.manage');
+        // Admin może edytować wszystkie piosenki
+        if ($user->hasRole('admin')) {
+            return true;
+        }
+
+        // Artysta może edytować tylko swoje piosenki
+        return $album->deleted_at === null && $user->id === $album->artist_id;
     }
 
     /**
@@ -65,8 +62,13 @@ class AlbumPolicy
      */
     public function delete(User $user, Album $album)
     {
-        return $album->deleted_at === null
-            && $user->can('albums.manage');
+        // Admin może usuwać wszystkie piosenki
+        if ($user->hasRole('admin')) {
+            return true;
+        }
+
+        // Artysta może usuwać tylko swoje piosenki
+        return $album->deleted_at === null && $user->id === $album->artist_id;
     }
 
     /**
@@ -78,7 +80,6 @@ class AlbumPolicy
      */
     public function restore(User $user, Album $album)
     {
-        return $album->deleted_at !== null
-            && $user->can('albums.manage');
+        return $album->deleted_at !== null && $user->hasRole('admin');
     }
 }

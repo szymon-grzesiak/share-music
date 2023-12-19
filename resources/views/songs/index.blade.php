@@ -16,7 +16,7 @@
                            +
                         </a>
                     @endcan
-                <livewire:songs.songs-table-view />
+                        <livewire:songs.songs-table-view />
             </div>
         </div>
     </div>

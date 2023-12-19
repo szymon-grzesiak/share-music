@@ -16,6 +16,7 @@ class SongForm extends Component
 
     public Song $song;
     public $genresIds;
+
     public Bool $editMode;
 
     public function rules()
@@ -59,6 +60,10 @@ class SongForm extends Component
         $this->song = $song;
         $this->genresIds = $this->song->genres->toArray();
         $this->editMode = $editMode;
+
+        if (!$editMode) {
+            $this->song->artist_id = auth()->id();
+        }
     }
 
     public function render()

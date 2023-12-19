@@ -37,12 +37,18 @@
 
             <!-- Page Content -->
             <div class="flex">
-                <aside class="bg-[rgb(30,30,65)] light-border custom-scrollbar sticky left-0 top-0 h-screen overflow-y-auto border-r p-6 pt-12 w-[266px]">
+                <aside class="bg-[rgb(30,30,65)] sticky left-0 top-0 h-screen overflow-y-auto p-6 pt-12 w-[266px]">
                     <h2 class="text-white text-4xl">Biblioteka</h2>
                     <div>
-                        <ul>
+                        <ul class="flex flex-col gap-4">
                             @foreach ($playlists as $playlist)
-                                <li class="text-white">{{ $playlist->name }}</li> <!-- Display playlist name -->
+                                <a class="hover:bg-white/10" href="{{ route('playlists.songs', ['playlist' => $playlist->id]) }}" >
+
+                                <li class="text-white flex justify-between items-center">
+                                    <img class="w-[60px] h-[60px]" src="{{$playlist->image}}" alt="{{$playlist->name}}"/>
+                                        <span>{{ strlen($playlist->name) > 26 ? substr($playlist->name, 0, 26) . '...' : $playlist->name }}</span>
+                                </li>
+                                </a>
                             @endforeach
                         </ul>
                     </div>

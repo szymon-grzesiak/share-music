@@ -48,8 +48,7 @@
             </div>
 
 
-
-            @if (count($actions))
+            @if (count($actions) && (Auth::user()->hasRole('admin') ||$model->artist_id === auth()->id()))
                 <div class="flex justify-end items-center absolute top-0 right-0">
                     <x-lv-actions.drop-down :actions="$actions" :model="$model" />
                 </div>

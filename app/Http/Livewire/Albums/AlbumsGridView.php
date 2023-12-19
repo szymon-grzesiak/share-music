@@ -57,7 +57,7 @@ class AlbumsGridView extends GridView
     public function repository(): Builder
     {
         $query = Album::query();
-        if (request()->user()->can('manage', Album::class)) {
+        if (request()->user()->hasRole('admin')) {
             $query->withTrashed();
         }
         return $query;
@@ -92,14 +92,15 @@ class AlbumsGridView extends GridView
     /** Actions by item */
     protected function actionsByRow()
     {
-        if (request()->user()->can('manage', Album::class)) {
             return [
                 new EditAlbumAction('albums.edit', __('translation.actions.edit')),
-                new SoftDeletesAlbumAction(),
-                new RestoreAlbumAction(),
+                new SoftDeletesAlbumAction(
+                    __('albums.actions.destroy')
+                ),
+                new RestoreAlbumAction(
+                    __('albums.actions.restore')
+                ),
             ];
-        }
-        return null;
     }
     protected function softDeletesNotificationDescription(Model $model)
     {

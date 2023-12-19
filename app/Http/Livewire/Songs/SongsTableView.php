@@ -27,6 +27,9 @@ class SongsTableView extends TableView
     use SoftDeletes;
     use Restore;
 
+    protected $model = Song::class;
+
+
     /**
      * Sets the searchable properties
      */
@@ -48,7 +51,7 @@ class SongsTableView extends TableView
         $query = Song::query()
             ->with(['album', 'genres', 'user']);
 
-        if (request()->user()->can('manage', Song::class)) {
+        if (request()->user()->hasRole('admin')) {
             $query->withTrashed();
         }
 

@@ -56,6 +56,8 @@ class PermissionSeeder extends Seeder
         $userRole->givePermissionTo('songs.index');
         $userRole->givePermissionTo('songs.manage');
         $userRole->givePermissionTo('albums.index');
+        $userRole->givePermissionTo('albums.manage');
+        $userRole->givePermissionTo('albums.show');
 
         // UŻYTKOWNIKA SYSTEMU
         $userRole = Role::findByName(config('auth.roles.user'));

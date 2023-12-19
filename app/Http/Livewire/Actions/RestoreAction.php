@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Actions;
 
+use Illuminate\Support\Facades\Auth;
 use LaravelViews\Views\View;
 use LaravelViews\Actions\Action;
 use Illuminate\Database\Eloquent\Model;
@@ -82,6 +83,6 @@ class RestoreAction extends Action
 
     public function renderIf($model, View $view)
     {
-        return request()->user()->can('restore', $model);
+        return $model->deleted_at !== null;
     }
 }

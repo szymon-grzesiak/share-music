@@ -31,8 +31,7 @@
             </div>
         </div>
 
-        <hr class="my-2">
-        <div class="grid grid-cols-2 gap-2">
+        <div class="hidden">
             <div class="">
                 <label for="artist_id">{{ __('songs.attributes.artist') }}</label>
             </div>

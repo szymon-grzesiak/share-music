@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Actions;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use LaravelViews\Actions\Action;
 use LaravelViews\Views\View;
 
@@ -59,8 +60,8 @@ class SoftDeletesAction extends Action
     /**
      * Execute the action when the user clicked on the button
      *
-     * @param $model Manufacturer object of the list where the user has clicked
-     * @param $view Current view where the action was executed from
+     * @param $model
+     * @param $view
      */
     public function handle($model, View $view)
     {
@@ -82,6 +83,6 @@ class SoftDeletesAction extends Action
 
     public function renderIf($model, View $view)
     {
-        return request()->user()->can('delete', $model);
+        return $model->deleted_at === null;
     }
 }

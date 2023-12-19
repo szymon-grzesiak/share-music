@@ -39,7 +39,10 @@ class SpecificPlaylistTableView extends TableView
      */
     public function repository(): Builder
     {
-        return Playlist::find($this->playlistId)->songs()->getQuery();
+        return Song::with(['album', 'user', 'genres'])
+            ->whereHas('playlists', function ($query) {
+                $query->where('playlists.id', $this->playlistId);
+            });
     }
 
 
@@ -51,13 +54,15 @@ class SpecificPlaylistTableView extends TableView
     public function headers(): array
     {
         return [
-            'ID',
-            'Title',
-            'Duration',
-            // Other headers for song attributes
+            'Okładka Albumu',
+            'Nazwa Albumu',
+            'Tytuł',
+            'Czas Trwania',
+            'Gatunek',
+            'Artysta',
+            // Możesz dodać więcej nagłówków jeśli potrzebujesz
         ];
     }
-
 
     /**
      * Sets the data to every cell of a single row
@@ -71,16 +76,17 @@ class SpecificPlaylistTableView extends TableView
         $seconds = $seconds % 60;
 
         $formattedDuration = sprintf('%02d:%02d', $minutes, $seconds);
+
+        $genreNames = $model->genres->pluck('name')->join(', ');
+
         return [
-            'id' => $model->id,
-            'title' => $model->title,
-            'duration' => $formattedDuration,
-            // Include other song attributes you wish to display
+            $model->album ? '<img class="w-14 h-14 mx-auto" src="' . $model->album->album_cover . '" alt="Album Cover" />' : 'No Cover',
+            $model->album ? '<span class="hover:underline"><a href="../albums?sortOrder=asc&search=' . $model->album->name . '">' . $model->album->name . '</a></span>' : 'No Album',
+            'Tytuł' => $model->title,
+            'Czas Trwania' => $formattedDuration,
+            'Gatunek' => $genreNames,
+            $model->user ? '<span class="hover:underline"><a href="../albums?sortOrder=asc&filters[input-user-filter]=' . $model->user->name . '">' . $model->user->name . '</a></span>' : 'No User'
         ];
-    }
-    public function mount($playlistId)
-    {
-        $this->playlistId = $playlistId;
     }
 
     /**
