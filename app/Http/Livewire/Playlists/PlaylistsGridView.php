@@ -22,7 +22,7 @@ class PlaylistsGridView extends GridView
      */
     protected $model = Playlist::class;
 
-    public $maxCols = 3;
+    public $maxCols = 4;
 
     public $cardComponent = 'livewire.playlists.grid-view-item';
 
@@ -41,7 +41,7 @@ class PlaylistsGridView extends GridView
         ];
     }
 
-    protected $paginate = 5;
+    protected $paginate = 8;
 
     /**
      * Sets a initial query with the data to fill the table

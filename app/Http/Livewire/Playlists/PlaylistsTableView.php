@@ -83,7 +83,7 @@ class PlaylistsTableView extends TableView
             $model->album ? $model->album->name : 'No Album',
             $model->title => '<span class="text-red-400">'.$model->title.'</span>',
             $model->genres->implode('name', ', '),
-            $model->user->name
+            $model->user->name,
         ];
     }
 

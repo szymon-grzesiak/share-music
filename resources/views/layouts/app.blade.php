@@ -37,23 +37,22 @@
 
             <!-- Page Content -->
             <div class="flex">
-                <aside class="bg-[rgb(30,30,65)] sticky left-0 top-0 h-screen overflow-y-auto p-6 pt-12 w-[266px]">
-                    <h2 class="text-white text-4xl">Biblioteka</h2>
+                <aside class="bg-[rgb(30,30,65)] sticky left-0 top-0 h-screen overflow-y-auto p-6 pt-12 w-full max-w-[300px]">
+                    <h2 class="text-white text-2xl mb-10">Biblioteka</h2>
                     <div>
                         <ul class="flex flex-col gap-4">
                             @foreach ($playlists as $playlist)
-                                <a class="hover:bg-white/10" href="{{ route('playlists.songs', ['playlist' => $playlist->id]) }}" >
-
-                                <li class="text-white flex justify-between items-center">
-                                    <img class="w-[60px] h-[60px]" src="{{$playlist->image}}" alt="{{$playlist->name}}"/>
-                                        <span>{{ strlen($playlist->name) > 26 ? substr($playlist->name, 0, 26) . '...' : $playlist->name }}</span>
+                                <li>
+                                    <a class="hover:bg-white/10 text-white flex justify-start items-center gap-x-4" href="{{ route('playlists.songs', ['playlist' => $playlist->id]) }}" >
+                                        <img class="w-[60px] h-[60px]" src="{{$playlist->image}}" alt="{{$playlist->name}}"/>
+                                        <span>{{ strlen($playlist->name) > 15 ? substr($playlist->name, 0, 15) . '...' : $playlist->name }}</span>
+                                    </a>
                                 </li>
-                                </a>
                             @endforeach
                         </ul>
                     </div>
                 </aside>
-                <main class="w-full"> <!-- Adjust the margin-left to match the width of the aside -->
+                <main class="w-full">
                     {{ $slot }}
                 </main>
             </div>
@@ -62,5 +61,48 @@
         @stack('modals')
         @livewireScripts
         @laravelViewsScripts('laravel-views')
+
+
+        <script>
+            function toggleTheme() {
+                let moonIcon = document.getElementById('moon-icon');
+                let sunIcon = document.getElementById('sun-icon');
+
+
+                moonIcon.classList.toggle('hidden');
+                sunIcon.classList.toggle('hidden');
+
+                let htmlElement = document.documentElement;
+                htmlElement.classList.toggle('dark');
+
+                // Save the current theme state to local storage
+                if (htmlElement.classList.contains('dark')) {
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+
+            function applySavedTheme() {
+                let savedTheme = localStorage.getItem('theme');
+                let moonIcon = document.getElementById('moon-icon');
+                let sunIcon = document.getElementById('sun-icon');
+                let htmlElement = document.documentElement;
+
+                if (savedTheme === 'dark') {
+                    htmlElement.classList.add('dark');
+                    sunIcon.classList.add('hidden');
+                    moonIcon.classList.remove('hidden');
+                } else {
+                    htmlElement.classList.remove('dark');
+                    sunIcon.classList.remove('hidden');
+                    moonIcon.classList.add('hidden');
+                }
+            }
+
+            // Apply the saved theme when the page loads
+            document.addEventListener('DOMContentLoaded', applySavedTheme);
+        </script>
+
     </body>
 </html>

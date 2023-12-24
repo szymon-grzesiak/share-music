@@ -74,6 +74,7 @@ Route::middleware([
     Route::get('async/genres', [GenreController::class, 'async'])->name('async.genres');
     Route::get('async/artists', [UserController::class, 'async'])->name('async.artists');
     Route::get('async/albums', [AlbumController::class, 'async'])->name('async.albums');
+    Route::get('async/playlists', [PlaylistController::class, 'async'])->name('async.playlists');
 });
 
 

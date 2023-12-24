@@ -41,6 +41,9 @@ body::before {
     filter: blur(50px);
 }
 
+
+
+
 body {
     margin: 0;
 }
@@ -106,7 +109,7 @@ body {
 }
 
 .buttonStyle {
-    background-color: rgb(30,30,65);
+    background-color: rgba(255,255,255,0.7);
     color: white;
     z-index: 10;
     transition: 0.2s ease-in;
@@ -132,3 +135,23 @@ body {
     left: -120px;
     border-radius: 20px;
 }
+
+.glassmorphismTable {
+    z-index: 1;
+    backdrop-filter: blur(40px);
+}
+
+.glassy {
+    background-image: url('https://res.cloudinary.com/jasberry/image/upload/v1688585130/abstraction_uviu3j.png');
+    background-size: cover;
+    z-index: -1;
+}
+
+.glassmorphismTable > div > div:nth-child(2) {
+    background-color: rgb(30,30,65);
+}
+
+.glassmorphismTable > div > div:nth-child(4) {
+    background-color: rgb(30,30,65);
+}
+

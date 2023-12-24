@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repositories\PlaylistRepository;
 use App\Models\Playlist;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,15 @@ class PlaylistController extends Controller
             'playlists.index'
         );
     }
+
+    public function async(Request $request, PlaylistRepository $repository)
+    {
+        return $repository->select(
+            $request->search,
+            $request->selected
+        );
+    }
+
 
     /**
      * Show the form for creating a new resource.

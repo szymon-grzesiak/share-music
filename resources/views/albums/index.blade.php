@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class=" sm:rounded-lg p-4" id="table-view-wrapper">
+            <div class=" sm:rounded-lg" id="table-view-wrapper">
                 @can('create', App\Models\Album::class)
                     <a
                         title="Dodaj piosenkę"

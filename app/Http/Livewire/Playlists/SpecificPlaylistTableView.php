@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Playlists;
 
+use App\Http\Livewire\Playlists\Actions\DeleteSongFromPlaylistAction;
 use App\Http\Livewire\Songs\Filters\InputAlbumFilter;
 use App\Http\Livewire\Songs\Filters\InputArtistFilter;
 use App\Http\Livewire\Songs\Filters\InputGenreFilter;
@@ -14,9 +15,7 @@ use LaravelViews\Views\TableView;
 use LaravelViews\Actions\RedirectAction;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Livewire\Filters\SoftDeletedFilter;
-use App\Http\Livewire\Albums\Actions\EditAlbumAction;
-use App\Http\Livewire\Albums\Actions\RestoreAlbumAction;
-use App\Http\Livewire\Albums\Actions\SoftDeletesAlbumAction;
+
 
 class SpecificPlaylistTableView extends TableView
 {
@@ -106,13 +105,26 @@ class SpecificPlaylistTableView extends TableView
     protected function actionsByRow()
     {
         return [
-            new EditAlbumAction(
-                'albums.edit',
-                __('albums.actions.edit')
-            ),
-            new SoftDeletesAlbumAction(),
-            new RestoreAlbumAction(),
+           new DeleteSongFromPlaylistAction()
         ];
+    }
+
+ function deleteFromPlaylist($songId) {
+     try {
+         $playlist = Playlist::find($this->playlistId);
+         $playlist->songs()->detach($songId);
+
+         // Here we emit a notification instead of an alert
+         $this->notification()->success(
+             $title = 'Song removed',
+             $description = 'The song was successfully removed from the playlist',
+         );
+     } catch (\Exception $e) {
+         $this->notification()->error(
+             $title = 'Error',
+             $description = 'There was an error removing the song from the playlist'
+         );
+     }
     }
 
     public function softDeletes(int $id)
