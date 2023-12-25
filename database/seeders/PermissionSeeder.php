@@ -65,6 +65,7 @@ class PermissionSeeder extends Seeder
         $userRole->givePermissionTo('albums.index');
         $userRole->givePermissionTo('songs.index');
         $userRole->givePermissionTo('playlists.index');
+        $userRole->givePermissionTo('playlists.manage');
 //        $userRole->givePermissionTo('songs.index');
 //        $userRole->givePermissionTo('playlist.index');
 //        $userRole->givePermissionTo('playlist.create');

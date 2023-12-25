@@ -20,7 +20,7 @@
         <hr class="my-2">
         <div class="grid grid-cols-2 gap-2">
             <div class="">
-                <label for="description">{{ __('playlists.attributes.name') }}</label>
+                <label for="description">{{ __('playlists.attributes.description') }}</label>
             </div>
             <div class="">
                 <x-wireui-input placeholder="{{ __('translation.enter') }}" wire:model="playlist.description" />

@@ -42,12 +42,14 @@
                     <div>
                         <ul class="flex flex-col gap-4">
                             @foreach ($playlists as $playlist)
-                                <li>
-                                    <a class="hover:bg-white/10 text-white flex justify-start items-center gap-x-4" href="{{ route('playlists.songs', ['playlist' => $playlist->id]) }}" >
-                                        <img class="w-[60px] h-[60px]" src="{{$playlist->image}}" alt="{{$playlist->name}}"/>
-                                        <span>{{ strlen($playlist->name) > 15 ? substr($playlist->name, 0, 15) . '...' : $playlist->name }}</span>
-                                    </a>
-                                </li>
+                                @if (Auth::user()->id == $playlist->user_id)
+                                    <li>
+                                        <a class="hover:bg-white/10 text-white flex justify-start items-center gap-x-4" href="{{ route('playlists.songs', ['playlist' => $playlist->id]) }}" >
+                                            <img class="w-[60px] h-[60px]" src="{{str_contains($playlist->image, 'http') ?  $playlist->image : $playlist->imageUrl()}}" alt="{{$playlist->name}}"/>
+                                            <span>{{ strlen($playlist->name) > 15 ? substr($playlist->name, 0, 15) . '...' : $playlist->name }}</span>
+                                        </a>
+                                    </li>
+                                @endif
                             @endforeach
                         </ul>
                     </div>
@@ -100,7 +102,6 @@
                 }
             }
 
-            // Apply the saved theme when the page loads
             document.addEventListener('DOMContentLoaded', applySavedTheme);
         </script>
 

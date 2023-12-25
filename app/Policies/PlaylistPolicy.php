@@ -53,8 +53,11 @@ class PlaylistPolicy
      */
     public function update(User $user, Playlist $playlist)
     {
-        return $playlist->deleted_at === null
-            && $user->can('playlists.manage');
+        // Admin może edytować wszystkie piosenki
+        if ($user->hasRole('admin')) {
+            return true;
+        }
+        return $playlist->deleted_at === null && $user->id === $playlist->user_id;
     }
 
     /**
@@ -66,8 +69,13 @@ class PlaylistPolicy
      */
     public function delete(User $user, Playlist $playlist)
     {
-        return $playlist->deleted_at === null
-            && $user->can('playlists.manage');
+        // Admin może usuwać wszystkie piosenki
+        if ($user->hasRole('admin')) {
+            return true;
+        }
+
+        return $playlist->deleted_at === null && $user->id === $playlist->user_id;
+
     }
 
     /**
@@ -79,7 +87,7 @@ class PlaylistPolicy
      */
     public function restore(User $user, Playlist $playlist)
     {
-        return $playlist->deleted_at !== null
-            && $user->can('playlists.manage');
+        return $playlist->deleted_at !== null && $user->id === $playlist->user_id;
+
     }
 }
