@@ -62,6 +62,7 @@ class SpecificAlbumTableView extends TableView
     public function headers(): array
     {
         return [
+            Header::title('Play'),
             Header::title(__('albums.attributes.album_cover')),
             Header::title(__('songs.attributes.title'))->sortBy('songs.title'),
             Header::title('Czas trwania')->sortBy('songs.duration'),
@@ -84,6 +85,7 @@ class SpecificAlbumTableView extends TableView
         $formattedDuration = sprintf('%02d:%02d', $minutes, $seconds);
 
         return [
+            'playButton' => '<span class="p-2 bg-white rounded-full"><button data-id="' . $model->id . '">' . $model->id . '</button></span>',
             $model->album ? '<img class="w-14 h-14 mx-auto" src="' . $model->album->album_cover . '" alt="Album Cover" />' : 'No Cover',
             $model->title => '<span class="text-red-400">'.$model->title.'</span>',
             $model->duration => $formattedDuration,

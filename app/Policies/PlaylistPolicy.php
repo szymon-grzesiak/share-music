@@ -22,7 +22,7 @@ class PlaylistPolicy
         return $user->can('playlists.index');
     }
 
-    public function view(User $user, Playlist $playlist)
+    public function view(User $user, ?Playlist $playlist)
     {
         $adminRole = Role::where('name', 'admin')->first();
 

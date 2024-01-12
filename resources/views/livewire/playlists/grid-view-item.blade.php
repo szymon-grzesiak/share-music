@@ -33,7 +33,7 @@
             </div>
         @endif
         <a title="{{ $name }}"  class="font-bold dark:text-dark-200 text-white text-lg hover:underline hover:cursor-pointer" href="{{ route('playlists.songs', ['playlist' => $model->id]) }}" >
-            {{ strlen($model->name) > 26 ? substr($model->name, 0, 26) . '...' : $model->name }}
+            {{ strlen($model->name) > 13 ? substr($model->name, 0, 13) . '...' : $model->name }}
         </a>
         <div class="flex justify-between items-center">
             <div class="dark:text-gray-500 text-[rgb(160,160,160)]">{{ strlen($user) > 15 ? substr($user, 0, 15) . '...' : $user }}</div>

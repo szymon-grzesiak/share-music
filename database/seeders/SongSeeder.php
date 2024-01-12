@@ -32,6 +32,7 @@ class SongSeeder extends Seeder
                     $song = Song::firstOrCreate([
                         'title' => $track['name'],
                         'duration' => $track['duration_ms'],
+                        'song_file' => $track['preview_url'],
                         'album_id' => $album->id,
                         'artist_id' => $artist->id,
                     ]);

@@ -37,7 +37,6 @@ class SongsTableView extends TableView
     public bool $showModal = false;
 
 
-
     /**
      * Sets the searchable properties
      */
@@ -85,6 +84,7 @@ class SongsTableView extends TableView
     public function headers(): array
     {
         return [
+            Header::title('Play'),
             Header::title(__('albums.attributes.album_cover')),
             Header::title('Nazwa albumu')->sortBy('albums.name'),
             Header::title(__('songs.attributes.title'))->sortBy('songs.title'),
@@ -107,8 +107,8 @@ class SongsTableView extends TableView
         $seconds = $seconds % 60;
 
         $formattedDuration = sprintf('%02d:%02d', $minutes, $seconds);
-
         return [
+            'playButton' => '<span class="p-2 bg-white rounded-full"><button data-id="' . $model->id . '">' . $model->id . '</button></span>',
             $model->album ? '<img class="w-14 h-14 mx-auto" src="' . $model->album->album_cover . '" alt="Album Cover" />' : 'No Cover',
             $model->album ? '<span class="hover:underline"><a href="albums?sortOrder=asc&search=' . $model->album->name . '">' . (strlen($model->album->name) > 15 ? substr($model->album->name, 0, 15) . '...' : $model->album->name) . '</a></span>' : 'No Album',
             'title' => '<span title="' . htmlspecialchars($model->title) . '">' . (strlen($model->title) > 15 ? substr($model->title, 0, 15) . '...' : $model->title) . '</span>',

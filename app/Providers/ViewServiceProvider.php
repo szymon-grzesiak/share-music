@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Playlist;
+use App\Models\Song;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -23,15 +24,20 @@ class ViewServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('layouts.app', function ($view) {
-            $query = Playlist::with(['user']);
+            $playlistsQuery = Playlist::query();
 
-            if (auth()->check() && auth()->user()->can('playlists.manage')) {
-                $query->withTrashed();
+            if (auth()->user()->hasRole('admin')) {
+                $playlistsQuery->withTrashed();
             } else {
-                $query->where('user_id', auth()->id());
+                $playlistsQuery->where('user_id', auth()->id());
             }
 
-            $view->with('playlists', $query->get());
+            $playlists = $playlistsQuery->get();
+
+            $songs = Song::with('album', 'user')->get();
+
+            $view->with('playlists', $playlists)
+                ->with('songs', $songs);
         });
     }
 }

@@ -63,7 +63,7 @@ class PlaylistsGridView extends GridView
         $user = Auth::user()->id;
         $query = Playlist::query()->where('user_id', $user);
 
-        if (request()->user()->can('playlists.manage')) {
+        if (request()->user()->hasRole('admin')) {
             $query->withTrashed();
         }
         return $query;

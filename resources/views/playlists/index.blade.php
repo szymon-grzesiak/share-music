@@ -12,7 +12,7 @@
                     <a
                         title="Stwórz playlistę"
                         href="{{ route('playlists.create') }}"
-                        class="buttonStyle flex justify-center items-center text-3xl rounded-full fixed bottom-0 right-0 mr-2 mb-6 w-12 h-12" >
+                        class="buttonStyle flex justify-center items-center text-3xl rounded-full fixed bottom-0 right-0 mr-2 mb-[100px] w-12 h-12" >
                         +
                     </a>
                 @endcan

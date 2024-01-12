@@ -49,9 +49,9 @@ props:
     </tr>
   </thead>
 
-  <tbody class="[&>*:nth-child(even)]:bg-white/20">
+  <tbody class="[&>*:nth-child(even)]:bg-white/20 hover:[&>*]:bg-white/40">
     @foreach ($items as $item)
-      <tr class="border-b border-gray-200 text-sm" wire:key="{{ $item->getKey() }}">
+      <tr class="border-b border-gray-200 text-sm customRow" wire:key="{{ $item->getKey() }}">
         @if ($this->hasBulkActions)
           <td class="pl-3">
             <span class="flex items-center justify-center">

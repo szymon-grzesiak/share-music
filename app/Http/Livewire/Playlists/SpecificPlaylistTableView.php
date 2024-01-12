@@ -22,6 +22,7 @@ class SpecificPlaylistTableView extends TableView
     use Actions;
 
     public $playlistId;
+    private static $num = 0;
 
 
     /**
@@ -53,6 +54,7 @@ class SpecificPlaylistTableView extends TableView
     public function headers(): array
     {
         return [
+            'Play',
             'Okładka Albumu',
             'Nazwa Albumu',
             'Tytuł',
@@ -70,6 +72,9 @@ class SpecificPlaylistTableView extends TableView
      */
     public function row($model): array
     {
+        self::$num++; // Inkrementacja zmiennej statycznej klasy
+
+
         $seconds = floor($model->duration / 1000);
         $minutes = floor($seconds / 60);
         $seconds = $seconds % 60;
@@ -79,6 +84,7 @@ class SpecificPlaylistTableView extends TableView
         $genreNames = $model->genres->pluck('name')->join(', ');
 
         return [
+            'playButton' => '<span data-id="'. $this->playlistId .'" class="p-2 bg-white rounded-full"><button data-id="' . $model->id . '">' . self::$num . '</button></span>',
             $model->album ? '<img class="w-14 h-14 mx-auto" src="' . $model->album->album_cover . '" alt="Album Cover" />' : 'No Cover',
             $model->album ? '<span class="hover:underline"><a href="../albums?sortOrder=asc&search=' . $model->album->name . '">' . $model->album->name . '</a></span>' : 'No Album',
             'Tytuł' => $model->title,

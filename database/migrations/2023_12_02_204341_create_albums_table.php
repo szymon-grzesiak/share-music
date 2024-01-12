@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('albums', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100)->unique();
+            $table->string('name', 200)->unique();
             $table->string('album_cover')->nullable();
             $table->date('release_date')->nullable();
             $table->unsignedBigInteger('artist_id');
