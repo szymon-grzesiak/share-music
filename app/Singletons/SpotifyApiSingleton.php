@@ -14,7 +14,7 @@ class SpotifyApiSingleton {
         $this->response = Http::withHeaders([
             'X-RapidAPI-Host' => 'spotify23.p.rapidapi.com',
             'X-RapidAPI-Key' => env('API_KEY')
-        ])->get('https://spotify23.p.rapidapi.com/albums/?ids=64LU4c1nfjz1t4VnGhagcg%2C6DEjYFkNZh67HP7R9PSZvv%2C6VgJZRUsCbR1NTnJWU85G4%2C0UtenXp3qVbWedKEaNRAp9%2C5mj5NblnMMm5G3n1cugGH7%2C4MwOuqjdK7OP1xaRPo83xT%2C4ocB97o3gdrIYyIwYSSwVy%2C3T4tUhGYeRNVUGevb0wThu%2C0vv1zKShlm7WuawEup5Mf4%2C6i7mF7whyRJuLJ4ogbH2wh%2C5Uly85dJHHDfHQCsyUQ8gw');
+        ])->get('https://spotify23.p.rapidapi.com/albums/?ids=18NOKLkZETa4sWwLMIm0UZ%2C41GuZcammIkupMPKH2OJ6I%2C2CIOGAByaHyjQ1EO55JSzC%2C3T4tUhGYeRNVUGevb0wThu%2C3DuiGV3J09SUhvp8gqNx8h%2C4MwOuqjdK7OP1xaRPo83xT');
     }
 
     public static function getInstance() {

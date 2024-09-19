@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Songs;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use App\Models\Song;
@@ -60,6 +61,7 @@ class SongForm extends Component
         $this->song = $song;
         $this->genresIds = $this->song->genres->toArray();
         $this->editMode = $editMode;
+
 
         if (!$editMode) {
             $this->song->artist_id = auth()->id();

@@ -31,7 +31,7 @@
             </div>
         </div>
 
-        <div class="hidden">
+        <div class="">
             <div class="">
                 <label for="artist_id">{{ __('songs.attributes.artist') }}</label>
             </div>
