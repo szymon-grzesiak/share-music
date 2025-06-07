@@ -1,5 +1,7 @@
 # Spotify Clone - A Full-Stack Laravel School Project
-
+#
+Whole documentation of this codebase available at: [https://deepwiki.com/szymon-grzesiak/share-music](https://deepwiki.com/szymon-grzesiak/share-music)
+#
 This is a full-stack web application developed as a school project, aiming to replicate some of the core functionalities of the Spotify music streaming service.
 
 ### Demo
